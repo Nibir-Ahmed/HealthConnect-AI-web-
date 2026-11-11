@@ -12,6 +12,7 @@ import {
   HiOutlineTrash,
   HiOutlineCheckCircle,
 } from 'react-icons/hi';
+import { resolveAvatar } from '../../utils/avatar';
 
 // Ensure the Admin session has a real Firebase Auth token with role: 'admin' in Firestore so cloud rules allow verifying doctors
 async function ensureAdminFirestoreAuth() {
@@ -72,7 +73,7 @@ const DoctorVerificationPage = () => {
             email: u.email || '',
             specialty: u.specialty || 'General Physician',
             hospital: u.hospital || '',
-            avatar: u.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(cleanName)}&background=2A9D8F&color=fff`,
+            avatar: resolveAvatar(u.avatar, cleanName),
             experience: Number(u.experience) || 1,
             rating: 5.0,
             reviews: 0,
@@ -255,7 +256,7 @@ const DoctorVerificationPage = () => {
                     <td className="py-4 px-6">
                       <div className="flex items-center gap-3">
                         <img
-                          src={doc.avatar || 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=200&q=80'}
+                          src={resolveAvatar(doc.avatar, doc.name)}
                           alt={doc.name}
                           className="w-10 h-10 rounded-xl object-cover border border-gray-100"
                         />

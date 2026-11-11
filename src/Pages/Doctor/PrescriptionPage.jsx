@@ -181,7 +181,7 @@ const PrescriptionPage = () => {
           >
             {appointments.map((apt) => (
               <option key={apt.id} value={apt.id}>
-                {apt.patientName} — {apt.date} at {apt.time} ({apt.status})
+                {apt.patientName}, {apt.date} at {apt.time} ({apt.status})
               </option>
             ))}
           </select>
@@ -332,7 +332,7 @@ const PrescriptionPage = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
                   {rx.medications.map((m, i) => (
                     <div key={i} className="p-2 rounded-xl bg-gray-50 border border-gray-100">
-                      <span className="font-bold text-gray-800">{m.name}</span> ({m.dosage}) —{' '}
+                      <span className="font-bold text-gray-800">{m.name}</span> ({m.dosage}),{' '}
                       <span className="text-gray-500">{m.frequency} for {m.duration}</span>
                     </div>
                   ))}

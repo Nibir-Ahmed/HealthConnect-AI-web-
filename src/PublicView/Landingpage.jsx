@@ -53,7 +53,7 @@ const Landingpage = () => {
       {/* navbar */}
       <Navbar />
 
-      {/* Hero Section — fills full viewport height so cards below don't peek in */}
+      {/* Hero Section: fills full viewport height so cards below don't peek in */}
       <section className="relative overflow-hidden bg-gradient-to-b from-emerald-50/40 via-white to-gray-50/50 border-b border-gray-100 min-h-[calc(100vh-4rem)] flex flex-col justify-between">
         {/* Background glow */}
         <div
@@ -133,7 +133,7 @@ const Landingpage = () => {
             </div>
             <h3 className="text-lg font-bold text-gray-900 mb-2">Symptom Checker</h3>
             <p className="text-sm text-gray-500 leading-relaxed">
-              Tell us how you feel in Bangla, Banglish or English — we'll help you figure out what might be going on and what to do next.
+              Tell us how you feel in Bangla, Banglish or English, and we'll help you figure out what might be going on and what to do next.
             </p>
           </div>
 
@@ -155,7 +155,7 @@ const Landingpage = () => {
             </div>
             <h3 className="text-lg font-bold text-gray-900 mb-2">Your Medical Records</h3>
             <p className="text-sm text-gray-500 leading-relaxed">
-              Store prescriptions, lab reports and scan results safely — access them anytime you need.
+              Store prescriptions, lab reports and scan results safely and access them anytime you need.
             </p>
           </div>
         </div>

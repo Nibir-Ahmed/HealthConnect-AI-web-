@@ -10,6 +10,7 @@ import {
   HiOutlineDocumentText,
   HiOutlineCheckCircle,
 } from 'react-icons/hi';
+import { resolveAvatar } from '../../utils/avatar';
 
 const AppointmentsPage = () => {
   const { user } = useAuth();
@@ -106,10 +107,7 @@ const AppointmentsPage = () => {
             >
               <div className="flex items-start gap-4">
                 <img
-                  src={
-                    apt.doctorAvatar ||
-                    'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=200&q=80'
-                  }
+                  src={resolveAvatar(apt.doctorAvatar, apt.doctorName)}
                   alt={apt.doctorName}
                   className="w-16 h-16 rounded-2xl object-cover border border-gray-100 shrink-0"
                 />

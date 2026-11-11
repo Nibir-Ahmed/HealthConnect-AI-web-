@@ -13,6 +13,7 @@ import {
   collection,
   getDocs,
 } from 'firebase/firestore';
+import { avatarFor } from '../utils/avatar';
 
 /**
  * HealthConnect Database & API Service Layer
@@ -119,7 +120,7 @@ export const authApi = {
             email: normalizedEmail,
             role: 'admin',
             isMasterAdmin: true,
-            avatar: 'https://ui-avatars.com/api/?name=System+Admin&background=2A9D8F&color=fff',
+            avatar: avatarFor('System Admin'),
             createdAt: now,
             lastLogin: now,
           };
@@ -145,7 +146,7 @@ export const authApi = {
           name: userCredential.user.displayName || email.split('@')[0],
           email: normalizedEmail,
           role: (role ? role.toLowerCase() : 'patient'),
-          avatar: userCredential.user.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(email.split('@')[0])}&background=2A9D8F&color=fff`,
+          avatar: userCredential.user.photoURL || avatarFor(email.split('@')[0]),
           createdAt: new Date().toISOString(),
           lastLogin: new Date().toISOString(),
         };
@@ -190,7 +191,7 @@ export const authApi = {
         name: name.trim(),
         email: normalizedEmail,
         role: normalizedRole,
-        avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(name.trim())}&background=2A9D8F&color=fff`,
+        avatar: avatarFor(name.trim()),
         phoneNumber: extra.phone || extra.phoneNumber || '',
         bloodGroup: extra.bloodGroup || '',
         gender: extra.gender || '',

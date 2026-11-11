@@ -8,6 +8,7 @@ import {
   HiOutlineClock,
   HiOutlineCurrencyBangladeshi,
 } from 'react-icons/hi';
+import { resolveAvatar } from '../../utils/avatar';
 
 const SPECIALTIES = [
   'All',
@@ -121,7 +122,7 @@ const DoctorListPage = () => {
                 <div className="flex items-start gap-4">
                   <div className="relative">
                     <img
-                      src={doc.avatar || 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=200&q=80'}
+                      src={resolveAvatar(doc.avatar, doc.name)}
                       alt={doc.name}
                       className="w-16 h-16 rounded-2xl object-cover border border-gray-100"
                     />

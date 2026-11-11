@@ -11,6 +11,7 @@ import {
   where,
   arrayUnion,
 } from 'firebase/firestore';
+import { isRemotePlaceholder, resolveAvatar, resolveCover } from '../utils/avatar';
 
 const DB_PREFIX = 'healthconnect_app_';
 const OVERRIDES_KEY = 'healthconnect_app_local_overrides';
@@ -98,9 +99,35 @@ function clearOverride(collection, id) {
   }
 }
 
+const AVATAR_FIELDS = {
+  avatar: 'name',
+  doctorAvatar: 'doctorName',
+  patientAvatar: 'patientName',
+  authorAvatar: 'author',
+};
+
+// Swap any old third-party placeholder image links for locally generated / bundled images
+function localizeImages(item) {
+  if (!item || typeof item !== 'object' || Array.isArray(item)) return item;
+  let changed = null;
+  for (const [field, nameField] of Object.entries(AVATAR_FIELDS)) {
+    if (field in item && (!item[field] || isRemotePlaceholder(item[field]))) {
+      changed = changed || { ...item };
+      changed[field] = resolveAvatar(item[field], item[nameField] || item.email || 'User');
+    }
+  }
+  if (typeof item.image === 'string' && isRemotePlaceholder(item.image)) {
+    changed = changed || { ...item };
+    changed.image = resolveCover(item.image);
+  }
+  return changed || item;
+}
+
 function getStore(collection) {
   const data = localStorage.getItem(`${DB_PREFIX}${collection}`);
-  return data ? JSON.parse(data) : null;
+  if (!data) return null;
+  const parsed = JSON.parse(data);
+  return Array.isArray(parsed) ? parsed.map(localizeImages) : parsed;
 }
 
 function setStore(collection, data) {
@@ -130,7 +157,26 @@ function mergeSnapshotIntoStore(collection, docs) {
       mergedMap.delete(id);
       continue;
     }
-    mergedMap.set(id, { ...(mergedMap.get(id) || {}), id, ...d.data(), ...(ov || {}) });
+    const prev = mergedMap.get(id) || {};
+    const fsData = d.data() || {};
+    const mergedItem = { ...prev, id, ...fsData, ...(ov || {}) };
+
+    // Never allow local overrides to wipe out chatMessages from Firestore
+    if (collection === 'appointments') {
+      const chatMap = new Map();
+      for (const list of [prev.chatMessages, ov?.chatMessages, fsData.chatMessages]) {
+        if (Array.isArray(list)) {
+          for (const m of list) {
+            if (m?.id) chatMap.set(m.id, m);
+          }
+        }
+      }
+      if (chatMap.size > 0) {
+        mergedItem.chatMessages = Array.from(chatMap.values());
+      }
+    }
+
+    mergedMap.set(id, mergedItem);
   }
 
   // Also include any override items not yet in store
@@ -144,22 +190,41 @@ function mergeSnapshotIntoStore(collection, docs) {
   finalItems.sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
   setStore(collection, finalItems);
 
-  // If appointments updated, extract any embedded chatMessages into the messages store
+  // If appointments updated, synchronize embedded chatMessages <-> messages store
   if (collection === 'appointments') {
     const existingMsgs = getStore('messages') || [];
     const msgMap = new Map(existingMsgs.map((m) => [m.id, m]));
-    let added = false;
+    let addedToLocal = false;
+
     for (const apt of finalItems) {
+      const aptChatIds = new Set(
+        Array.isArray(apt.chatMessages) ? apt.chatMessages.map((m) => m?.id).filter(Boolean) : []
+      );
+
+      // 1. Pull incoming Firestore chatMessages into local messages store
       if (Array.isArray(apt.chatMessages)) {
         for (const m of apt.chatMessages) {
           if (m?.id && !msgMap.has(m.id)) {
             msgMap.set(m.id, m);
-            added = true;
+            addedToLocal = true;
           }
         }
       }
+
+      // 2. Push any local messages for this appointment that aren't in Firestore yet
+      if (auth.currentUser) {
+        const unsynced = existingMsgs.filter(
+          (m) => m?.id && m.appointmentId === apt.id && !aptChatIds.has(m.id)
+        );
+        if (unsynced.length > 0) {
+          updateDoc(doc(firestore, 'appointments', apt.id), {
+            chatMessages: arrayUnion(...unsynced.map((m) => cleanData(m))),
+          }).catch(() => {});
+        }
+      }
     }
-    if (added) {
+
+    if (addedToLocal) {
       setStore('messages', Array.from(msgMap.values()));
     }
   }
@@ -245,25 +310,7 @@ function attachFirestoreListener(collection) {
   const unsub = onSnapshot(
     fsCollection(firestore, collection),
     (snapshot) => {
-      const colOverrides = getOverrides()[collection] || {};
-      const firestoreItems = snapshot.docs
-        .map((d) => {
-          const id = d.id;
-          const ov = colOverrides[id];
-          if (ov?.__deleted) return null;
-          return { id, ...d.data(), ...(ov || {}) };
-        })
-        .filter(Boolean);
-
-      const firestoreIds = new Set(firestoreItems.map((i) => i.id));
-      for (const [ovId, ovData] of Object.entries(colOverrides)) {
-        if (!firestoreIds.has(ovId) && !ovData.__deleted && ovData.id) {
-          firestoreItems.push(ovData);
-        }
-      }
-
-      firestoreItems.sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
-      setStore(collection, firestoreItems);
+      mergeSnapshotIntoStore(collection, snapshot.docs);
     },
     () => {
       activeUnsubscribers.delete(collection);
@@ -345,11 +392,26 @@ export const db = {
       .then(() => clearOverride(collection, newId))
       .catch(() => {});
 
-    // Also sync chat messages inside parent appointment document so Patient & Doctor receive them via Firestore
+    // Also sync chat messages inside parent appointment document(s) so Patient & Doctor receive them in real-time via Firestore
     if (collection === 'messages' && newItem.appointmentId) {
-      updateDoc(doc(firestore, 'appointments', newItem.appointmentId), {
-        chatMessages: arrayUnion(newItem),
-      }).catch(() => {});
+      const allApts = getStore('appointments') || [];
+      const targetAptIds = new Set([newItem.appointmentId]);
+      for (const apt of allApts) {
+        if (
+          apt?.id &&
+          newItem.patientId &&
+          newItem.doctorId &&
+          apt.patientId === newItem.patientId &&
+          (apt.doctorId === newItem.doctorId || apt.doctorDocId === newItem.doctorId)
+        ) {
+          targetAptIds.add(apt.id);
+        }
+      }
+      for (const aptId of targetAptIds) {
+        updateDoc(doc(firestore, 'appointments', aptId), {
+          chatMessages: arrayUnion(newItem),
+        }).catch(() => {});
+      }
     }
 
     return newItem;

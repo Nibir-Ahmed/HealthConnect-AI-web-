@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import {
   HiOutlineClipboardList,
   HiOutlinePhone,
@@ -12,8 +13,18 @@ import {
   HiOutlineDocumentAdd,
   HiOutlineSparkles,
 } from 'react-icons/hi';
-import { evaluateSymptomsWithAI } from '../../services/aiTriageService';
+import { evaluateSymptomsWithAI, cleanHumanText } from '../../services/aiTriageService';
 import db from '../../services/db';
+
+function humanizeMessageText(raw) {
+  if (!raw) return '';
+  return cleanHumanText(raw)
+    .replace(/^Initial Assessment:\s*/gim, 'Possible Condition: ')
+    .replace(/^[•-]\s*Urgency Level:.*$/gim, '')
+    .replace(/^[•-]\s*Recommended Specialist:.*$/gim, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
 
 const PROMPT_CHIPS = [
   'Amar 2 din dhore matha batha r jor',
@@ -34,12 +45,40 @@ const INITIAL_MESSAGES = [
 ];
 
 const DiagnosisPage = () => {
-  const [messages, setMessages] = useState(INITIAL_MESSAGES);
+  const { user } = useAuth();
+  const storageKey = `hc_triage_session_${user?.id || 'guest'}`;
+
+  const [messages, setMessages] = useState(() => {
+    try {
+      const saved = localStorage.getItem(storageKey);
+      if (!saved) return INITIAL_MESSAGES;
+      const parsed = JSON.parse(saved);
+      return Array.isArray(parsed)
+        ? parsed.map((m) => ({
+            ...m,
+            text: m.sender === 'assistant' ? humanizeMessageText(m.text) : m.text,
+          }))
+        : INITIAL_MESSAGES;
+    } catch {
+      return INITIAL_MESSAGES;
+    }
+  });
   const [input, setInput] = useState('');
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [emergencyActive, setEmergencyActive] = useState(false);
   const [savedVaultId, setSavedVaultId] = useState(null);
   const messagesEndRef = useRef(null);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(storageKey, JSON.stringify(messages));
+    } catch {
+      // ignore storage errors
+    }
+    if (messages.some((m) => m.isEmergency)) {
+      setEmergencyActive(true);
+    }
+  }, [messages, storageKey]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -111,18 +150,21 @@ const DiagnosisPage = () => {
   const handleSaveToVault = (msg) => {
     try {
       const record = {
+        patientId: user?.id,
+        patientName: user?.name || 'Patient',
         title: `Symptom Check: ${msg.suggestedSpecialty || 'General'}`,
         category: 'Symptom Assessment',
         date: new Date().toISOString().split('T')[0],
-        doctor: 'HealthConnect',
+        doctor: 'HealthConnect Care Team',
         facility: 'Online Consultation',
-        notes: msg.text,
+        notes: humanizeMessageText(msg.text),
         urgencyLevel: msg.urgencyLevel,
         suggestedSpecialty: msg.suggestedSpecialty,
         fileType: 'text/summary',
+        fileSize: 20480,
         createdAt: new Date().toISOString(),
       };
-      const created = db.add('health_records', record);
+      db.add('health_records', record);
       setSavedVaultId(msg.id);
       setTimeout(() => setSavedVaultId(null), 3000);
     } catch (err) {
@@ -266,8 +308,8 @@ const DiagnosisPage = () => {
                   )}
 
                   {/* Main Clinical Assessment Text */}
-                  <div className="whitespace-pre-line text-xs sm:text-sm font-normal">
-                    {msg.text}
+                  <div className="whitespace-pre-line text-xs sm:text-sm font-normal leading-relaxed text-gray-700">
+                    {msg.sender === 'assistant' ? humanizeMessageText(msg.text) : msg.text}
                   </div>
 
                   {/* Differential Diagnoses from Knowledge Base */}
@@ -277,26 +319,34 @@ const DiagnosisPage = () => {
                         Possible Conditions
                       </h5>
                       <div className="space-y-2">
-                        {msg.matchedConditions.map((cond, idx) => (
-                          <div key={idx} className="bg-gray-50 rounded-xl p-2.5 border border-gray-100">
-                            <div className="flex items-center justify-between text-xs mb-1">
-                              <span className="font-semibold text-gray-800">
-                                {cond.name} {cond.bengaliName && <span className="text-gray-500 font-normal">({cond.bengaliName})</span>}
-                              </span>
-                              {cond.confidence && (
-                                <span className="font-bold text-[#2A9D8F] text-[11px]">{cond.confidence}% Match</span>
+                        {msg.matchedConditions.map((cond, idx) => {
+                          const pct =
+                            typeof cond.confidence === 'number'
+                              ? cond.confidence <= 1
+                                ? Math.round(cond.confidence * 100)
+                                : Math.round(cond.confidence)
+                              : null;
+                          return (
+                            <div key={idx} className="bg-gray-50 rounded-xl p-2.5 border border-gray-100">
+                              <div className="flex items-center justify-between text-xs mb-1">
+                                <span className="font-semibold text-gray-800">
+                                  {cond.name} {cond.bengaliName && <span className="text-gray-500 font-normal">({cond.bengaliName})</span>}
+                                </span>
+                                {pct !== null && (
+                                  <span className="font-bold text-[#2A9D8F] text-[11px]">{pct}% Match</span>
+                                )}
+                              </div>
+                              {pct !== null && (
+                                <div className="w-full bg-gray-200 rounded-full h-1.5 overflow-hidden">
+                                  <div
+                                    className="bg-[#2A9D8F] h-1.5 rounded-full transition-all duration-500"
+                                    style={{ width: `${pct}%` }}
+                                  />
+                                </div>
                               )}
                             </div>
-                            {cond.confidence && (
-                              <div className="w-full bg-gray-200 rounded-full h-1.5 overflow-hidden">
-                                <div
-                                  className="bg-[#2A9D8F] h-1.5 rounded-full transition-all duration-500"
-                                  style={{ width: `${cond.confidence}%` }}
-                                />
-                              </div>
-                            )}
-                          </div>
-                        ))}
+                          );
+                        })}
                       </div>
                     </div>
                   )}
@@ -313,6 +363,24 @@ const DiagnosisPage = () => {
                           <li key={idx} className="flex items-start gap-2">
                             <HiOutlineCheckCircle className="w-4 h-4 text-[#2A9D8F] shrink-0 mt-0.5" />
                             <span>{precaution}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Warning Signs / Red Flags Checklist */}
+                  {msg.warningSigns && msg.warningSigns.length > 0 && (
+                    <div className="mt-4 pt-3 border-t border-gray-100">
+                      <h5 className="text-[11px] font-bold uppercase tracking-wider text-amber-600 mb-2 flex items-center gap-1">
+                        <HiOutlineExclamation className="w-3.5 h-3.5 text-amber-500" />
+                        Warning Signs to Watch For
+                      </h5>
+                      <ul className="space-y-1 text-xs text-gray-600">
+                        {msg.warningSigns.map((sign, idx) => (
+                          <li key={idx} className="flex items-start gap-2">
+                            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0 mt-1.5" />
+                            <span>{sign}</span>
                           </li>
                         ))}
                       </ul>

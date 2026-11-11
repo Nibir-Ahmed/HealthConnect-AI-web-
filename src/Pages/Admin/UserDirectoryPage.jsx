@@ -6,6 +6,7 @@ import {
   HiOutlineShieldCheck,
   HiOutlineCheckCircle,
 } from 'react-icons/hi';
+import { resolveAvatar } from '../../utils/avatar';
 
 const UserDirectoryPage = () => {
   const [users, setUsers] = useState([]);
@@ -127,7 +128,7 @@ const UserDirectoryPage = () => {
                   <td className="py-4 px-6">
                     <div className="flex items-center gap-3">
                       <img
-                        src={userItem.avatar || 'https://ui-avatars.com/api/?name=User'}
+                        src={resolveAvatar(userItem.avatar, userItem.name)}
                         alt={userItem.name}
                         className="w-9 h-9 rounded-full object-cover border border-gray-100"
                       />

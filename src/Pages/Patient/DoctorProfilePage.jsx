@@ -11,6 +11,7 @@ import {
   HiOutlineArrowLeft,
   HiOutlineCheckCircle,
 } from 'react-icons/hi';
+import { resolveAvatar } from '../../utils/avatar';
 
 const DoctorProfilePage = () => {
   const { id } = useParams();
@@ -121,7 +122,7 @@ const DoctorProfilePage = () => {
       {/* Doctor Overview Card */}
       <div className="bg-white rounded-3xl border border-gray-100 p-6 sm:p-8 shadow-xs flex flex-col sm:flex-row gap-6 items-start">
         <img
-          src={doctor.avatar || 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=200&q=80'}
+          src={resolveAvatar(doctor.avatar, doctor.name)}
           alt={doctor.name}
           className="w-24 h-24 sm:w-28 sm:h-28 rounded-3xl object-cover border border-gray-100 shadow-xs shrink-0"
         />

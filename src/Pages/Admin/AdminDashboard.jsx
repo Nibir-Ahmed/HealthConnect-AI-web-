@@ -11,6 +11,7 @@ import {
   HiOutlineExclamation,
   HiOutlineArrowRight,
 } from 'react-icons/hi';
+import { resolveAvatar } from '../../utils/avatar';
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
@@ -165,7 +166,7 @@ const AdminDashboard = () => {
               >
                 <div className="flex items-center gap-3.5 min-w-0">
                   <img
-                    src={doc.avatar || 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&w=200&q=80'}
+                    src={resolveAvatar(doc.avatar, doc.name)}
                     alt={doc.name}
                     className="w-12 h-12 rounded-2xl object-cover border border-gray-100"
                   />

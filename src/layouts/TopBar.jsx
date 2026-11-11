@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import db from '../services/db';
 import { HiOutlinePhone } from 'react-icons/hi';
+import { resolveAvatar } from '../utils/avatar';
 
 const TopBar = () => {
   const { user, role } = useAuth();
@@ -42,7 +43,7 @@ const TopBar = () => {
         {/* User Role Tag */}
         <div className="flex items-center gap-2 pl-2 border-l border-gray-100">
           <img
-            src={user?.avatar || 'https://ui-avatars.com/api/?name=User'}
+            src={resolveAvatar(user?.avatar, user?.name)}
             alt="Avatar"
             className="w-8 h-8 rounded-full object-cover border border-gray-200"
           />

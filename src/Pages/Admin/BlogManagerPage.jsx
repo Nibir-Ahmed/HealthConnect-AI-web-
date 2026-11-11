@@ -7,6 +7,7 @@ import {
   HiOutlinePencilAlt,
   HiOutlineCheckCircle,
 } from 'react-icons/hi';
+import { DEFAULT_BLOG_COVER, avatarFor } from '../../utils/avatar';
 
 const CATEGORIES = ['Cardiology', 'General Health', 'Mental Health', 'Pediatrics', 'Dermatology'];
 
@@ -21,7 +22,7 @@ const BlogManagerPage = () => {
   const [content, setContent] = useState('');
   const [readTime, setReadTime] = useState('4 min read');
   const [author, setAuthor] = useState('Dr. Fahim Ahmed');
-  const [image, setImage] = useState('https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=800&q=80');
+  const [image, setImage] = useState(DEFAULT_BLOG_COVER);
   const [successNotice, setSuccessNotice] = useState('');
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const BlogManagerPage = () => {
     setContent('');
     setReadTime('4 min read');
     setAuthor('HealthConnect Editorial Board');
-    setImage('https://images.unsplash.com/photo-1505751172876-fa1923c5c528?auto=format&fit=crop&w=800&q=80');
+    setImage(DEFAULT_BLOG_COVER);
     setShowEditor(true);
   };
 
@@ -82,7 +83,7 @@ const BlogManagerPage = () => {
         content: content.trim(),
         readTime,
         author: author.trim(),
-        authorAvatar: 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=200&q=80',
+        authorAvatar: avatarFor(author.trim()),
         image: image.trim(),
         likes: 0,
       });
@@ -192,15 +193,28 @@ const BlogManagerPage = () => {
 
               <div>
                 <label className="block text-xs font-bold uppercase tracking-wider text-gray-600 mb-1.5">
-                  Cover Image URL
+                  Cover Image URL / Path
                 </label>
                 <input
-                  type="url"
+                  type="text"
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
                   required
+                  placeholder="Image URL or local path"
                   className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#2A9D8F]"
                 />
+                {image && (
+                  <div className="mt-2 relative rounded-xl overflow-hidden border border-gray-200 h-36 bg-gray-50">
+                    <img
+                      src={image}
+                      alt="Cover preview"
+                      className="w-full h-full object-cover"
+                    />
+                    <span className="absolute bottom-2 left-2 px-2 py-0.5 rounded-md bg-black/60 text-white text-[10px] font-medium backdrop-blur-xs">
+                      Cover Preview
+                    </span>
+                  </div>
+                )}
               </div>
 
               <div>

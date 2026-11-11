@@ -12,6 +12,7 @@ import {
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
+import { avatarFor } from '../utils/avatar';
 
 const AuthContext = createContext(null);
 
@@ -60,9 +61,7 @@ export const AuthProvider = ({ children }) => {
               role: isAdminEmail ? 'admin' : 'patient',
               avatar:
                 firebaseUser.photoURL ||
-                `https://ui-avatars.com/api/?name=${encodeURIComponent(
-                  isAdminEmail ? 'System Admin' : firebaseUser.displayName || 'User'
-                )}&background=2A9D8F&color=fff`,
+                avatarFor(isAdminEmail ? 'System Admin' : firebaseUser.displayName || 'User'),
               createdAt: new Date().toISOString(),
               lastLogin: new Date().toISOString(),
             };
@@ -163,7 +162,7 @@ export const AuthProvider = ({ children }) => {
           name: firebaseUser.displayName || 'Google User',
           email: firebaseUser.email,
           role: normalizedRole,
-          avatar: firebaseUser.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(firebaseUser.displayName || 'User')}&background=2A9D8F&color=fff`,
+          avatar: firebaseUser.photoURL || avatarFor(firebaseUser.displayName || 'User'),
           phoneNumber: firebaseUser.phoneNumber || '',
           bloodGroup: '',
           gender: '',

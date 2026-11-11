@@ -12,6 +12,7 @@ import {
   HiOutlineCheckCircle,
   HiOutlineClock,
 } from 'react-icons/hi';
+import { resolveAvatar } from '../../utils/avatar';
 
 const Dashboard = () => {
   const { user } = useAuth();
@@ -148,7 +149,7 @@ const Dashboard = () => {
                 >
                   <div className="flex items-center gap-4">
                     <img
-                      src={apt.doctorAvatar || 'https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&w=200&q=80'}
+                      src={resolveAvatar(apt.doctorAvatar, apt.doctorName)}
                       alt={apt.doctorName}
                       className="w-12 h-12 rounded-full object-cover border border-gray-100"
                     />

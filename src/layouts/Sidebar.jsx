@@ -19,6 +19,7 @@ import {
   HiOutlineCog,
   HiOutlineLogout,
 } from 'react-icons/hi';
+import { resolveAvatar } from '../utils/avatar';
 
 const NAV_CONFIG = {
   patient: [
@@ -115,7 +116,7 @@ const Sidebar = () => {
       <div className="p-3 border-t border-gray-100 flex items-center justify-between">
         <div className="flex items-center gap-2.5 min-w-0">
           <img
-            src={user?.avatar || 'https://ui-avatars.com/api/?name=User'}
+            src={resolveAvatar(user?.avatar, user?.name)}
             alt={user?.name || 'User'}
             className="w-8 h-8 rounded-full object-cover shrink-0 border border-gray-200"
           />

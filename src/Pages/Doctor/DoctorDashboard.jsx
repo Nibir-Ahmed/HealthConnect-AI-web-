@@ -12,6 +12,7 @@ import {
   HiOutlineShieldCheck,
   HiOutlineArrowRight,
 } from 'react-icons/hi';
+import { resolveAvatar } from '../../utils/avatar';
 
 const DoctorDashboard = () => {
   const { user } = useAuth();
@@ -46,7 +47,7 @@ const DoctorDashboard = () => {
           name: cleanName.startsWith('Dr.') ? cleanName : `Dr. ${cleanName}`,
           email: user.email || '',
           specialty: user.specialty || 'General Physician',
-          avatar: user.avatar || `https://ui-avatars.com/api/?name=${encodeURIComponent(cleanName)}&background=2A9D8F&color=fff`,
+          avatar: resolveAvatar(user.avatar, cleanName),
           experience: Number(user.experience) || 1,
           rating: 5.0,
           reviews: 0,
@@ -197,7 +198,7 @@ const DoctorDashboard = () => {
               >
                 <div className="flex items-center gap-4">
                   <img
-                    src={apt.patientAvatar || 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=200&q=80'}
+                    src={resolveAvatar(apt.patientAvatar, apt.patientName)}
                     alt={apt.patientName}
                     className="w-12 h-12 rounded-full object-cover border border-gray-100"
                   />

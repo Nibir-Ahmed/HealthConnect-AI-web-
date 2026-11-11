@@ -186,7 +186,10 @@ const HealthVaultPage = () => {
                     </p>
                   )}
                   <p className="text-[10px] text-gray-400 mt-1">
-                    {(rec.fileSize / (1024 * 1024)).toFixed(2)} MB • {rec.fileType}
+                    {Number(rec.fileSize) > 0
+                      ? `${(Number(rec.fileSize) / (1024 * 1024)).toFixed(2)} MB`
+                      : 'Clinical Record'}{' '}
+                    • {rec.fileType || 'Document'}
                   </p>
                 </div>
               </div>

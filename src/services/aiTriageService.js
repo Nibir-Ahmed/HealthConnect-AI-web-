@@ -79,6 +79,18 @@ export function matchKnowledgeBase(userText) {
 }
 
 /**
+ * Strips markdown asterisks/hashes so text always reads like natural human writing
+ */
+export function cleanHumanText(text) {
+  if (!text) return '';
+  return String(text)
+    .replace(/\*\*+/g, '')
+    .replace(/\*+/g, '')
+    .replace(/^#+\s*/gm, '')
+    .trim();
+}
+
+/**
  * Deterministic local fallback response generator
  */
 function generateLocalTriageResponse(userText, matchedConditions) {
@@ -89,17 +101,17 @@ function generateLocalTriageResponse(userText, matchedConditions) {
       severityScore: 2,
       suggestedSpecialty: 'General Physician',
       matchedConditions: [],
-      clinicalAssessment: `**Summary of Symptoms**\n\nThank you for sharing your symptoms. They do not appear to indicate an immediate emergency, but if symptoms persist for more than 48 hours or worsen, consulting a doctor is strongly recommended.\n\n• Get plenty of rest and stay well hydrated.\n• Monitor your temperature and symptoms.\n• Schedule a consultation with a General Physician if symptoms do not improve.`,
+      clinicalAssessment: `Thanks for sharing how you're feeling. From what you've described so far, this doesn't look like an immediate emergency, though it's important to keep a close eye on how your symptoms progress over the next 24 to 48 hours.\n\nTry to get plenty of rest, drink enough water or oral rehydration fluids, and avoid taking antibiotics on your own. If you don't start feeling better soon, booking a quick checkup with a General Physician would be the safest step.`,
       precautions: [
-        'Maintain adequate oral hydration (2.5–3L clean water or ORS daily).',
-        'Monitor temperature, blood pressure, and resting pulse every 6 hours.',
-        'Avoid self-medicating with antibiotics without a prescription.',
-        'Consult a verified doctor if symptoms worsen.'
+        'Drink plenty of clean water, soup, or ORS throughout the day.',
+        'Keep track of your temperature and how you feel every few hours.',
+        'Avoid taking antibiotics or strong painkillers without a doctor’s advice.',
+        'Book a checkup with a General Physician if symptoms last more than 2 days.'
       ],
       warningSigns: [
-        'High fever (>102°F or 38.9°C) lasting over 3 days',
-        'Sudden severe dizziness or inability to keep fluids down',
-        'Difficulty breathing or chest discomfort'
+        'High fever above 102°F (38.9°C) that does not come down',
+        'Severe dizziness, persistent vomiting, or inability to keep fluids down',
+        'Trouble breathing or any new chest discomfort'
       ]
     };
   }
@@ -124,7 +136,7 @@ function generateLocalTriageResponse(userText, matchedConditions) {
       bengaliName: c.bengaliName,
       confidence: c.confidence
     })),
-    clinicalAssessment: `**Initial Assessment: ${primaryMatch.name} (${primaryMatch.bengaliName})**\n\nBased on your reported symptoms, they are consistent with common signs of **${primaryMatch.name}**.\n\n• **Urgency Level**: ${urgency}\n• **Recommended Specialist**: ${primaryMatch.suggestedSpecialty}\n\nWe recommend consulting a doctor for a proper checkup. Please review the recommended self-care tips below.`,
+    clinicalAssessment: `From the symptoms you mentioned, this closely matches signs commonly seen with ${primaryMatch.name} (${primaryMatch.bengaliName}).\n\nBecause this usually requires timely medical attention, it would be best to consult a ${primaryMatch.suggestedSpecialty} soon for a proper examination and any needed lab tests. In the meantime, please follow the care steps below and watch out for the warning signs listed.`,
     precautions: primaryMatch.precautions || [],
     warningSigns: primaryMatch.emergencyRedFlags || []
   };
@@ -152,7 +164,7 @@ export async function evaluateSymptomsWithAI(symptomText) {
       matchedConditions: [
         { name: 'Acute Coronary Syndrome / Emergency Distress', bengaliName: 'তীব্র জরুরী অবস্থা', confidence: 95 }
       ],
-      clinicalAssessment: `🚨 **EMERGENCY MEDICAL ALERT: SEEK IMMEDIATE CARE**\n\nBased on your reported symptoms (*"${cleanText}"*), this could indicate a serious or time-critical condition requiring emergency medical help.\n\n**What to do right now:**\n1. Stop all physical exertion immediately and sit upright in a comfortable position.\n2. Do NOT drive yourself.\n3. Dial **999** for emergency ambulance dispatch or go to the nearest emergency room immediately.`,
+      clinicalAssessment: `Please seek emergency medical care right away. The symptoms you described ("${cleanText}") can be a sign of a serious, time-critical condition that needs immediate attention at a hospital.\n\nPlease stop any physical activity and sit upright in a comfortable position. Do not try to drive yourself. Call 999 for an ambulance or have someone take you to the nearest emergency room immediately.`,
       precautions: [
         'Stop all physical activity immediately.',
         'Loosen tight clothing around neck and waist.',
@@ -173,27 +185,30 @@ export async function evaluateSymptomsWithAI(symptomText) {
   const matchedConditions = matchKnowledgeBase(cleanText);
 
   // -------------------------------------------------------------
-  // Layer 3: Groq Cloud LLM Inference (openai/gpt-oss-120b)
+  // Layer 3: Groq Cloud LLM Inference
   // -------------------------------------------------------------
   const apiKey = import.meta.env.VITE_GROQ_API_KEY;
-  const modelName = import.meta.env.VITE_GROQ_MODEL || 'openai/gpt-oss-120b';
+  const preferredModel = import.meta.env.VITE_GROQ_MODEL || 'llama-3.3-70b-versatile';
+  const modelsToTry = preferredModel === 'llama-3.3-70b-versatile'
+    ? [preferredModel]
+    : [preferredModel, 'llama-3.3-70b-versatile'];
 
   if (apiKey && apiKey !== 'your_groq_api_key_here') {
-    try {
-      const topMatchesContext = matchedConditions.slice(0, 3).map(c => 
-        `- ${c.name} (${c.bengaliName}): Category=${c.triageCategory}, Score=${c.severityScore}/7, Specialty=${c.suggestedSpecialty}. Precautions: ${c.precautions.join('; ')}`
-      ).join('\n');
+    const topMatchesContext = matchedConditions.slice(0, 3).map(c => 
+      `- ${c.name} (${c.bengaliName}): Category=${c.triageCategory}, Score=${c.severityScore}/7, Specialty=${c.suggestedSpecialty}. Precautions: ${c.precautions.join('; ')}`
+    ).join('\n');
 
-      const systemPrompt = `You are a medical intake and symptom guidance assistant for HealthConnect.
-You specialize in evaluating patient complaints across English, Banglish (e.g. "amar 2 din dhore matha batha r jor"), and Bengali script.
-Never identify yourself as an AI, bot, or machine learning model. Speak warmly, respectfully, and empathetically like a healthcare coordinator helping a patient.
+    const systemPrompt = `You are a caring, experienced medical triage coordinator at HealthConnect.
+You help patients understand their symptoms across English, Banglish (e.g. "amar 2 din dhore matha batha r jor"), and Bengali script.
+Write in warm, natural, conversational plain text like a real human clinician speaking to a patient.
+STRICT FORMATTING RULE: Never use asterisks (* or **), markdown headers (#), or robotic bullet labels like "Initial Assessment:" or "Urgency Level:". Write 2 short, natural paragraphs in plain text.
 
 KNOWLEDGE BASE CONTEXT:
 ${topMatchesContext || 'Use standard medical guidelines.'}
 
 GUIDELINES:
 1. Categorize urgency as Mild (self-care), Moderate (clinic visit), Urgent (same-day doctor visit), or Critical (emergency 999).
-2. DO NOT prescribe specific prescription pharmaceutical drugs (like antibiotics or steroids). Recommend supportive care like fluids, ORS, paracetamol for fever, and rest.
+2. DO NOT prescribe specific prescription drugs (like antibiotics or steroids). Recommend supportive care like fluids, ORS, paracetamol for fever, and rest.
 3. Suggest the most relevant medical specialist from: General Physician, Cardiology, Dermatology, Gastroenterology, Neurology, Pulmonology, Urology, Pediatrics, Orthopedics.
 4. Output STRICT JSON adhering to this exact schema with NO markdown wrapping around the JSON:
 {
@@ -204,50 +219,66 @@ GUIDELINES:
   "matchedConditions": [
     { "name": string, "bengaliName": string, "confidence": number }
   ],
-  "clinicalAssessment": string (markdown formatted empathetic explanation of what these symptoms suggest, clear self-care advice, and guidance on when to see a doctor. Do NOT mention you are an AI or LLM),
+  "clinicalAssessment": string (2 short warm paragraphs in plain text with NO asterisks * or ** and NO bullet points),
   "precautions": [string, string, string],
   "warningSigns": [string, string, string]
 }`;
 
-      const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${apiKey}`,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          model: modelName,
-          messages: [
-            { role: 'system', content: systemPrompt },
-            { role: 'user', content: cleanText },
-          ],
-          temperature: 0.2,
-          max_tokens: 800,
-        }),
-      });
+    for (const modelName of modelsToTry) {
+      try {
+        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            model: modelName,
+            messages: [
+              { role: 'system', content: systemPrompt },
+              { role: 'user', content: cleanText },
+            ],
+            temperature: 0.3,
+            max_tokens: 800,
+          }),
+        });
 
-      if (response.ok) {
-        const data = await response.json();
-        const content = data.choices?.[0]?.message?.content || '';
-        
-        // Extract JSON from response (handling potential code block wraps)
-        const jsonMatch = content.match(/\{[\s\S]*\}/);
-        if (jsonMatch) {
-          const parsed = JSON.parse(jsonMatch[0]);
-          return {
-            isEmergency: Boolean(parsed.isEmergency),
-            urgencyLevel: parsed.urgencyLevel || 'Moderate',
-            severityScore: Number(parsed.severityScore) || 3,
-            suggestedSpecialty: parsed.suggestedSpecialty || 'General Physician',
-            matchedConditions: Array.isArray(parsed.matchedConditions) ? parsed.matchedConditions : [],
-            clinicalAssessment: parsed.clinicalAssessment || content,
-            precautions: Array.isArray(parsed.precautions) ? parsed.precautions : [],
-            warningSigns: Array.isArray(parsed.warningSigns) ? parsed.warningSigns : [],
-          };
+        if (response.ok) {
+          const data = await response.json();
+          const content = data.choices?.[0]?.message?.content || '';
+          
+          const jsonMatch = content.match(/\{[\s\S]*\}/);
+          if (jsonMatch) {
+            const parsed = JSON.parse(jsonMatch[0]);
+            return {
+              isEmergency: Boolean(parsed.isEmergency),
+              urgencyLevel: parsed.urgencyLevel || 'Moderate',
+              severityScore: Number(parsed.severityScore) || 3,
+              suggestedSpecialty: parsed.suggestedSpecialty || 'General Physician',
+              matchedConditions: Array.isArray(parsed.matchedConditions)
+                ? parsed.matchedConditions.map((c) => ({
+                    ...c,
+                    confidence:
+                      typeof c.confidence === 'number'
+                        ? c.confidence <= 1
+                          ? Math.round(c.confidence * 100)
+                          : Math.round(c.confidence)
+                        : 85,
+                  }))
+                : [],
+              clinicalAssessment: cleanHumanText(parsed.clinicalAssessment || content),
+              precautions: Array.isArray(parsed.precautions)
+                ? parsed.precautions.map(cleanHumanText)
+                : [],
+              warningSigns: Array.isArray(parsed.warningSigns)
+                ? parsed.warningSigns.map(cleanHumanText)
+                : [],
+            };
+          }
         }
+      } catch (err) {
+        console.warn(`Triage request failed for ${modelName}:`, err);
       }
-    } catch (err) {
-      console.warn('Groq AI Triage inference failed, falling back to local clinical engine:', err);
     }
   }
 
