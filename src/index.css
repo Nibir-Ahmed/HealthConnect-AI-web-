@@ -1,0 +1,78 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: light --default;
+}
+
+@theme {
+  --color-primary: #2A9D8F;
+  --color-primary-light: #3AB8A8;
+  --color-primary-dark: #1E7A6E;
+  --color-primary-faded: rgba(42, 157, 143, 0.1);
+  --color-emergency: #E63946;
+  --color-emergency-light: #FF6B6B;
+  --color-emergency-faded: rgba(230, 57, 70, 0.1);
+  --color-brand-bg: #F8FAFB;
+  --color-brand-card: #FFFFFF;
+  --color-brand-border: #E8ECF0;
+  --color-brand-text: #1A1D26;
+  --color-brand-muted: #6B7280;
+}
+
+/* Base Typography & Background */
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #F8FAFB;
+  color: #1A1D26;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* WCAG 2.1 AA focus visible states */
+:focus-visible {
+  outline: 2px solid #2A9D8F;
+  outline-offset: 2px;
+}
+
+/* Smooth scrolling news/services ticker */
+@keyframes hc-ticker {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-hc-ticker {
+  display: flex;
+  width: max-content;
+  animation: hc-ticker 28s linear infinite;
+}
+
+.animate-hc-ticker:hover {
+  animation-play-state: paused;
+}
+
+/* Print styling for Emergency Medical Card export */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-medical-card, #printable-medical-card * {
+    visibility: visible;
+  }
+  #printable-medical-card {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    box-shadow: none !important;
+    border: 2px solid #1A1D26 !important;
+  }
+}

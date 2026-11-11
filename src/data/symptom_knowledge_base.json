@@ -1,0 +1,417 @@
+{
+  "version": "1.1.0",
+  "generated_at": "2026-10-12T00:10:00Z",
+  "total_conditions": 12,
+  "conditions": [
+    {
+      "id": "viral_fever_flu",
+      "name": "Viral Fever / Seasonal Influenza",
+      "bengali_name": "সাধারণ ভাইরাল জ্বর ও ইনফ্লুয়েঞ্জা",
+      "triage_category": "Mild",
+      "severity_score": 2,
+      "suggested_specialty": "General Physician",
+      "canonical_symptoms": [
+        "fever",
+        "headache",
+        "body_ache",
+        "runny_nose",
+        "sore_throat"
+      ],
+      "multilingual_aliases": {
+        "fever": ["fever", "jor", "jhor", "gaye jor", "temp", "high temp", "জ্বর", "গরম শরীর"],
+        "headache": ["headache", "matha batha", "matha betha", "matha dhorche", "মাথা ব্যথা"],
+        "body_ache": ["body ache", "muscle pain", "ga betha", "ga batha", "shorir betha", "shorir batha", "গা ব্যথা", "শরীর ব্যথা"],
+        "runny_nose": ["runny nose", "cold", "sordi", "nak pani", "নাক দিয়ে পানি পড়া", "সর্দি"],
+        "sore_throat": ["sore throat", "gola betha", "gola batha", "gola chulkani", "গলা ব্যথা", "গলা খুসখুস"]
+      },
+      "sample_patient_utterances": [
+        "Amar 2 din dhore matha batha r jor, sordi o legeche.",
+        "Mild fever with headache and runny nose since yesterday.",
+        "কাল থেকে হালকা জ্বর, মাথা ব্যথা ও সর্দি।"
+      ],
+      "precautions": [
+        "Take complete bed rest and drink plenty of fluids (warm water, lemon-ginger tea, soup).",
+        "Take Paracetamol (500mg) for fever and body ache as needed (max 3-4 times daily with food).",
+        "Perform warm saline gargles 2-3 times daily for sore throat relief.",
+        "Consult a general physician if fever persists beyond 3-4 days or rises above 102°F (38.9°C)."
+      ],
+      "emergency_red_flags": [
+        "Persistent high fever >103°F unresponsive to antipyretics",
+        "Shortness of breath or rapid breathing",
+        "Severe lethargy or confusion"
+      ]
+    },
+    {
+      "id": "dengue_fever",
+      "name": "Dengue Fever",
+      "bengali_name": "ডেঙ্গু জ্বর",
+      "triage_category": "Urgent",
+      "severity_score": 5,
+      "suggested_specialty": "General Physician",
+      "canonical_symptoms": [
+        "high_fever",
+        "retro_orbital_pain",
+        "joint_muscle_pain",
+        "skin_rash",
+        "nausea_vomiting"
+      ],
+      "multilingual_aliases": {
+        "high_fever": ["high fever", "tibrro jor", "onek jor", "chomke jor", "hot body", "তীব্র জ্বর", "উচ্চ তাপমাত্রা"],
+        "retro_orbital_pain": ["pain behind eyes", "chokher pichone betha", "chokher pichone batha", "eye socket pain", "চোখের পেছনে ব্যথা"],
+        "joint_muscle_pain": ["severe body ache", "bone break fever", "ga hat pa betha", "ga hat pa batha", "haddi betha", "haddi batha", "গা হাত পা ব্যথা", "হাড় ব্যথা"],
+        "skin_rash": ["rash", "red spots", "lal chokh", "lal daag", "চামড়ায় লাল ফুসকুড়ি"],
+        "nausea_vomiting": ["bomi", "bomi bhab", "vomit", "throwing up", "বমি বমি ভাব", "বমি"]
+      },
+      "sample_patient_utterances": [
+        "Sudden high fever with intense bone ache and severe pain behind eyes.",
+        "Amar 2 din dhore khub jor shathe gayer sob haddi betha r chokhe betha.",
+        "হঠাৎ তীব্র জ্বর এসেছে এবং সারা গায়ে প্রচণ্ড ব্যথা ও চোখের পেছনে চাপ লাগছে।"
+      ],
+      "precautions": [
+        "Drink at least 3 liters of fluids daily (ORS, green coconut water, clear broth).",
+        "Perform Complete Blood Count (CBC) and NS1 antigen test within 24-48 hours.",
+        "Take Paracetamol for fever management; strictly avoid Aspirin, Ibuprofen, or other NSAIDs to avoid bleeding.",
+        "Monitor for warning signs: gum bleeding, black stool, persistent vomiting, severe abdominal pain."
+      ],
+      "emergency_red_flags": [
+        "Gum bleeding or mucosal hemorrhage",
+        "Persistent severe abdominal pain",
+        "Platelet drop below 50,000 / persistent vomiting"
+      ]
+    },
+    {
+      "id": "acute_coronary_syndrome",
+      "name": "Acute Coronary Syndrome / Heart Attack",
+      "bengali_name": "হার্ট অ্যাটাক / তীব্র হৃদরোগ",
+      "triage_category": "Critical_Emergency",
+      "severity_score": 7,
+      "suggested_specialty": "Cardiology",
+      "canonical_symptoms": [
+        "chest_pain",
+        "shortness_of_breath",
+        "radiating_arm_pain",
+        "cold_sweat",
+        "dizziness"
+      ],
+      "multilingual_aliases": {
+        "chest_pain": ["chest pain", "pressure on chest", "chest tightness", "buke betha", "buke batha", "buke chap", "buke jala", "বুকে তীব্র ব্যথা", "বুকে চাপ"],
+        "shortness_of_breath": ["cannot breathe", "shortness of breath", "dyspnea", "shash kosto", "shas kosto", "shash nite parchi na", "শ্বাসকষ্ট", "শ্বাস নিতে কষ্ট"],
+        "radiating_arm_pain": ["pain in left arm", "jaw pain", "ba haate betha", "ba haate batha", "ghare betha", "ghare batha", "বাম হাতে ব্যথা", "চোয়ালে ব্যথা"],
+        "cold_sweat": ["cold sweat", "excessive sweating", "thanda gham", "ghamiye jaoa", "ঠান্ডা ঘাম"],
+        "dizziness": ["dizziness", "feeling faint", "matha ghur", "matha ghurano", "মাথা ঘোরানো", "অজ্ঞান ভাব"]
+      },
+      "sample_patient_utterances": [
+        "Severe crushing chest pain radiating to left arm with cold sweat.",
+        "Buke onek chap lagche, ba haate betha choriye jacche r shash nite parchi na.",
+        "বুকে প্রচণ্ড চাপ ও ব্যথা, শ্বাস নিতে কষ্ট হচ্ছে এবং শরীর ঘেমে ঠান্ডা হয়ে যাচ্ছে।"
+      ],
+      "precautions": [
+        "IMMEDIATE ACTION: Stop all exertion and sit upright or in a comfortable semi-reclined position.",
+        "Do NOT drive yourself. Dial emergency dispatch (999) or proceed immediately to the nearest cardiac center.",
+        "Chew an uncoated Aspirin (300mg) if advised by an emergency clinician and not allergic.",
+        "Loosen any restrictive clothing around neck and chest."
+      ],
+      "emergency_red_flags": [
+        "Crushing chest pressure lasting >5 minutes",
+        "Loss of consciousness or near syncope",
+        "Cyanosis (bluish lips or fingernails)"
+      ]
+    },
+    {
+      "id": "gerd_gastritis",
+      "name": "GERD / Acute Gastritis",
+      "bengali_name": "গ্যাস্ট্রিক / বুকজ্বালা ও এসিডিটি",
+      "triage_category": "Mild",
+      "severity_score": 2,
+      "suggested_specialty": "Gastroenterology",
+      "canonical_symptoms": [
+        "heartburn",
+        "acid_reflux",
+        "epigastric_pain",
+        "bloating",
+        "nausea"
+      ],
+      "multilingual_aliases": {
+        "heartburn": ["heartburn", "burning in chest", "buke jala", "buk jolche", "বুকে জ্বালাপোড়া"],
+        "acid_reflux": ["sour burp", "acid taste in mouth", "tok dholok", "tok dhekur", "টক ঢেঁকুর"],
+        "epigastric_pain": ["upper stomach pain", "pet betha", "pet batha", "pete betha", "pete batha", "pet kamrano", "পেটের ওপরের অংশে ব্যথা"],
+        "bloating": ["bloating", "gas in stomach", "pet fapa", "pet bhari", "পেট ফাঁপা", "গ্যাস"],
+        "nausea": ["nausea", "feeling like vomiting", "bomi bhab", "বমি বমি ভাব"]
+      },
+      "sample_patient_utterances": [
+        "Burning sensation in middle of chest and sour taste in throat after dinner.",
+        "Buke jala korche r tok dhekur uthche, pete onek gas.",
+        "খাওয়ার পর বুক জ্বলে এবং টক ঢেঁকুর আসে, পেট খুব ভারী লাগছে।"
+      ],
+      "precautions": [
+        "Avoid heavy, oily, fried, and spicy foods. Eat smaller, frequent meals.",
+        "Do not lie down immediately after eating; wait at least 2–3 hours.",
+        "Elevate head of bed by 6 inches when sleeping.",
+        "Drink lukewarm water; consider taking an antacid or PPI as advised by a doctor."
+      ],
+      "emergency_red_flags": [
+        "Difficulty or pain while swallowing (dysphagia)",
+        "Vomiting blood or coffee-ground material",
+        "Black tarry stools"
+      ]
+    },
+    {
+      "id": "migraine_headache",
+      "name": "Migraine Headache",
+      "bengali_name": "মাইগ্রেন / আধকপালী মাথা ব্যথা",
+      "triage_category": "Moderate",
+      "severity_score": 3,
+      "suggested_specialty": "Neurology",
+      "canonical_symptoms": [
+        "throbbing_headache",
+        "unilateral_headache",
+        "photophobia",
+        "nausea",
+        "visual_aura"
+      ],
+      "multilingual_aliases": {
+        "throbbing_headache": ["throbbing headache", "pulsing head pain", "matha betha", "matha batha", "matha tip tip betha", "মাথা দপদপ করা ব্যথা"],
+        "unilateral_headache": ["one sided headache", "half head pain", "ek pashe betha", "ek pashe batha", "adhkopali", "মাথার একপাশে ব্যথা"],
+        "photophobia": ["sensitivity to light and sound", "alo shojjo hoy na", "shobdo kharap lage", "আলো সহ্য না হওয়া"],
+        "nausea": ["nausea", "vomiting feeling", "bomi bhab", "বমি ভাব"],
+        "visual_aura": ["flashing lights", "blind spots", "chokhe jhapsa", "চোখে ঝাপসা দেখা"]
+      },
+      "sample_patient_utterances": [
+        "Severe throbbing pain on left side of head with sensitivity to bright light.",
+        "Amar mathar ba pashe thak thak kore betha korche r alor dike takano jacche na.",
+        "মাথার একপাশে তীব্র দপদপানি ব্যথা এবং আলো দেখলে কষ্ট বাড়ে।"
+      ],
+      "precautions": [
+        "Rest in a quiet, dark, and cool room.",
+        "Apply a cold cloth or ice pack to forehead or temples.",
+        "Maintain adequate hydration with water and electrolyte drinks.",
+        "Identify and avoid known migraine triggers (caffeine withdrawal, cheese, stress, lack of sleep)."
+      ],
+      "emergency_red_flags": [
+        "Sudden 'thunderclap' headache reaching peak intensity in seconds",
+        "Headache accompanied by stiff neck and high fever",
+        "Confusion, weakness, or slurred speech"
+      ]
+    },
+    {
+      "id": "acute_gastroenteritis",
+      "name": "Acute Gastroenteritis / Food Poisoning",
+      "bengali_name": "ফুড পয়জনিং / তীব্র ডায়রিয়া ও বমি",
+      "triage_category": "Moderate",
+      "severity_score": 4,
+      "suggested_specialty": "Gastroenterology",
+      "canonical_symptoms": [
+        "watery_diarrhea",
+        "vomiting",
+        "abdominal_cramps",
+        "fever",
+        "dehydration"
+      ],
+      "multilingual_aliases": {
+        "watery_diarrhea": ["watery diarrhea", "loose motion", "bar bar toilet", "patla paykhana", "পাতলা পায়খানা", "ডায়েরিয়া"],
+        "vomiting": ["vomiting", "throwing up", "bomi", "bar bar bomi", "বার বার বমি"],
+        "abdominal_cramps": ["stomach cramps", "pet kamrano", "pet khorche", "পেট মোচড় দিয়ে ব্যথা"],
+        "fever": ["mild fever", "jor", "jhor", "gaye jor", "হালকা জ্বর"],
+        "dehydration": ["dry mouth", "extreme thirst", "mukh shukiye jaoa", "দুর্বলতা ও পানিশূন্যতা"]
+      },
+      "sample_patient_utterances": [
+        "Frequent loose stool and vomiting after eating street food yesterday.",
+        "Pet kharap hoyeche, bar bar patla paykhana r bomi hocche, khub durbol lagche.",
+        "বাইরের খাবার খাওয়ার পর থেকে ঘন ঘন পাতলা পায়খানা এবং বমি হচ্ছে।"
+      ],
+      "precautions": [
+        "Prepare Oral Rehydration Salts (ORS) solution in clean drinking water and drink after each loose stool.",
+        "Avoid dairy, spicy, fatty, and sugary foods. Consume light khichuri, green banana mash, or rice water.",
+        "Do not take antimotility medications without physician advice if fever is present.",
+        "Wash hands thoroughly with soap before eating and after toilet use."
+      ],
+      "emergency_red_flags": [
+        "Inability to keep fluids down for >12 hours",
+        "Blood or mucus in stool",
+        "Severe sunken eyes, lack of urination for 8 hours, or extreme dizziness"
+      ]
+    },
+    {
+      "id": "bronchial_asthma_exacerbation",
+      "name": "Bronchial Asthma / Respiratory Distress",
+      "bengali_name": "হাঁপানি / তীব্র শ্বাসকষ্ট",
+      "triage_category": "Urgent",
+      "severity_score": 5,
+      "suggested_specialty": "Pulmonology",
+      "canonical_symptoms": [
+        "wheezing",
+        "shortness_of_breath",
+        "chest_tightness",
+        "persistent_cough"
+      ],
+      "multilingual_aliases": {
+        "wheezing": ["wheezing", "whistling sound in chest", "buke bashi baaje", "shash nebar somoy awaj", "বুকে বাঁশির মতো শব্দ"],
+        "shortness_of_breath": ["breathlessness", "cannot catch breath", "shash kosto", "shas kosto", "shas nite koshto", "দম বন্ধ ভাব", "শ্বাসকষ্ট"],
+        "chest_tightness": ["chest tight", "buke chap", "buke ghurano", "বুকে ভারী চাপ"],
+        "persistent_cough": ["cough at night", "shukna kashi", "kashi", "শুষ্ক কাশি"]
+      },
+      "sample_patient_utterances": [
+        "Sudden breathlessness and wheezing sound while breathing, worse at night.",
+        "Thanda lege shash kosto shuru hoyeche, buke bashi bajche r kashi thamche na.",
+        "বুকে বাঁশির মতো শব্দ হচ্ছে এবং শ্বাস নিতে অনেক কষ্ট হচ্ছে, কাশি হচ্ছে।"
+      ],
+      "precautions": [
+        "Immediately use your prescribed rescue inhaler (e.g. Salbutamol) with spacer if available.",
+        "Sit upright and lean slightly forward; avoid lying flat.",
+        "Stay away from active asthma triggers (dust, cold air, smoke, strong odors, animal fur).",
+        "Seek emergency medical evaluation if breathing does not improve within 10-15 minutes of inhaler use."
+      ],
+      "emergency_red_flags": [
+        "Inability to speak full sentences in one breath",
+        "Bluish lips or fingertips (hypoxia)",
+        "Peak flow reading below 50% of personal best"
+      ]
+    },
+    {
+      "id": "urinary_tract_infection",
+      "name": "Urinary Tract Infection (UTI)",
+      "bengali_name": "ইউরিনারি ট্র্যাক্ট ইনফেকশন / প্রস্রাবে সংক্রমণ",
+      "triage_category": "Moderate",
+      "severity_score": 3,
+      "suggested_specialty": "Urology",
+      "canonical_symptoms": [
+        "dysuria",
+        "urinary_frequency",
+        "lower_abdominal_pain",
+        "cloudy_urine",
+        "fever"
+      ],
+      "multilingual_aliases": {
+        "dysuria": ["burning sensation during urination", "prosrabe jala", "peshabe jala", "প্রসাবে জ্বালাপোড়া"],
+        "urinary_frequency": ["frequent urge to urinate", "bar bar peshab", "bar bar prosrab", "ঘন ঘন প্রস্রাবের বেগ"],
+        "lower_abdominal_pain": ["pelvic pain", "tolpete betha", "tolpete batha", "tolpet betha", "tolpet batha", "তলপেটে ব্যথা"],
+        "cloudy_urine": ["foul smelling urine", "cloudy urine", "ghola prosrab", "ঘোলা বা দুর্গন্ধযুক্ত প্রস্রাব"],
+        "fever": ["mild fever", "jor", "jhor", "jor jor bhab", "হালকা জ্বর"]
+      },
+      "sample_patient_utterances": [
+        "Intense burning pain while urinating and frequent urge every 15 minutes.",
+        "Prosrab korar somoy khub jala kore r tolpet betha kore, bar bar prosraber veg hoy.",
+        "প্রস্রাবের সময় ভীষণ জ্বালাপোড়া করে এবং ঘন ঘন প্রস্রাবের বেগ আসে।"
+      ],
+      "precautions": [
+        "Drink plenty of water (at least 2.5–3 liters per day) to flush bacteria.",
+        "Empty your bladder regularly without delaying urination.",
+        "Obtain a Urine Routine & Microscopic Examination (R/M/E) and Urine Culture before starting antibiotics.",
+        "Consult a certified doctor or urologist for targeted antibiotic therapy."
+      ],
+      "emergency_red_flags": [
+        "High fever with shaking chills and rigors",
+        "Severe flank or lower back pain (suggestive of pyelonephritis/kidney infection)",
+        "Gross blood in urine (hematuria)"
+      ]
+    },
+    {
+      "id": "typhoid_fever",
+      "name": "Typhoid Fever",
+      "bengali_name": "টাইফয়েড জ্বর",
+      "triage_category": "Urgent",
+      "severity_score": 5,
+      "suggested_specialty": "General Physician",
+      "canonical_symptoms": [
+        "step_ladder_fever",
+        "headache",
+        "abdominal_pain",
+        "constipation_or_diarrhea",
+        "fatigue"
+      ],
+      "multilingual_aliases": {
+        "step_ladder_fever": ["high fever increasing daily", "continuous fever", "protidin jor barche", "ক্রমাগত বাড়ছে এমন জ্বর"],
+        "headache": ["persistent headache", "matha betha", "matha batha", "matha betha charche na", "মাথা ব্যথা"],
+        "abdominal_pain": ["stomach pain", "pete betha", "pete batha", "pet betha", "pet batha", "পেটে ব্যথা"],
+        "fatigue": ["extreme weakness", "durbolota", "shorir obosh", "চরম দুর্বলতা"]
+      },
+      "sample_patient_utterances": [
+        "Fever rising every day for a week, accompanied by severe headache, stomach pain, and exhaustion.",
+        "1 shoptaho dhore protidin jor barbe, matha betha charche na r pete betha.",
+        "এক সপ্তাহ ধরে একটানা জ্বর এবং শরীর প্রচণ্ড দুর্বল ও পেটে ব্যথা।"
+      ],
+      "precautions": [
+        "Perform Widal test or Blood Culture / Typhidot as prescribed by physician.",
+        "Ensure water is boiled for at least 1 minute before drinking.",
+        "Eat well-cooked, soft foods; avoid raw vegetables and street food.",
+        "Complete the full course of prescribed antibiotics even if fever subsides."
+      ],
+      "emergency_red_flags": [
+        "Severe intestinal bleeding or bloody stool",
+        "Acute sudden sharp abdominal pain (potential perforation)",
+        "Extreme delirium or confusion"
+      ]
+    },
+    {
+      "id": "viral_hepatitis_jaundice",
+      "name": "Viral Hepatitis / Acute Jaundice",
+      "bengali_name": "জন্ডিস / হেপাটাইটিস",
+      "triage_category": "Moderate",
+      "severity_score": 4,
+      "suggested_specialty": "Gastroenterology",
+      "canonical_symptoms": [
+        "yellow_eyes_skin",
+        "dark_urine",
+        "loss_of_appetite",
+        "fatigue",
+        "right_upper_quadrant_pain"
+      ],
+      "multilingual_aliases": {
+        "yellow_eyes_skin": ["yellow eyes", "yellow skin", "chokh holud", "gayer rong holud", "চোখ হলুদ হওয়া", "জন্ডিস"],
+        "dark_urine": ["dark yellow urine", "holud prosrab", "লালচে বা হলুদ প্রস্রাব"],
+        "loss_of_appetite": ["no appetite", "khide nai", "khabar khete icche kore na", "অরুচি"],
+        "fatigue": ["exhaustion", "durbol", "দুর্বলতা"]
+      },
+      "sample_patient_utterances": [
+        "Eyes turned yellow, urine is dark amber, and complete loss of appetite with tiredness.",
+        "Chokh holud hoye geche, prosraber rong ghoro holud r khide ekebare nei.",
+        "চোখ হলুদ হয়ে গেছে এবং প্রস্রাবের রঙ গাঢ় হলুদ, কোনো খাবারের রুচি নেই।"
+      ],
+      "precautions": [
+        "Get Serum Bilirubin, SGPT/ALT, and Viral Hepatitis profile (Anti-HAV, HBsAg) checked.",
+        "Get plenty of bed rest during the acute symptomatic stage.",
+        "Avoid fatty, heavy food and alcohol completely; drink fresh hygienic fluids.",
+        "Avoid taking unprescribed herbal medicines or unverified traditional cures that harm liver function."
+      ],
+      "emergency_red_flags": [
+        "Severe confusion, drowsiness, or altered sleep-wake cycle (hepatic encephalopathy)",
+        "Spontaneous bleeding or bruising",
+        "Ascites (rapid fluid accumulation in belly)"
+      ]
+    },
+    {
+      "id": "allergic_dermatitis",
+      "name": "Allergic Dermatitis / Urticaria",
+      "bengali_name": "এলার্জি / ত্বকের ফুসকুড়ি ও চুলকানি",
+      "triage_category": "Mild",
+      "severity_score": 2,
+      "suggested_specialty": "Dermatology",
+      "canonical_symptoms": [
+        "pruritus",
+        "skin_rash",
+        "red_welts",
+        "dry_scaly_skin"
+      ],
+      "multilingual_aliases": {
+        "pruritus": ["itching", "itchy skin", "chulkani", "ga chulkay", "চুলকানি"],
+        "skin_rash": ["rash", "red spots", "lal daag", "lal chokh", "চামড়ায় লাল দাগ"],
+        "red_welts": ["hives", "chaka chaka daag", "fule otha", "চাকা চাকা লাল দাগ"]
+      },
+      "sample_patient_utterances": [
+        "Severe itchy red rash and hives all over arms and chest after eating prawns.",
+        "Gaye chaka chaka lal daag utheche r oshojjo chulkani hocche.",
+        "সারা শরীরে লাল চাকা দাগ উঠেছে এবং ভীষণ চুলকাচ্ছে।"
+      ],
+      "precautions": [
+        "Do not scratch the affected skin to prevent secondary bacterial infection.",
+        "Apply cool compresses or calamine lotion to soothe inflamed skin.",
+        "Identify and eliminate suspected triggers (certain foods, detergents, fabrics, animal dander).",
+        "Consult a doctor for appropriate non-sedating oral antihistamines."
+      ],
+      "emergency_red_flags": [
+        "Facial swelling, swelling of lips, tongue, or eyelids (angioedema)",
+        "Difficulty breathing or throat tightness (anaphylaxis)"
+      ]
+    }
+  ]
+}
