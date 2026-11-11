@@ -4,7 +4,7 @@ const DocumentCard = ({ document }) => {
   return (
     <div className="bg-white rounded-2xl border border-gray-100 p-4 shadow-xs flex items-center justify-between">
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center text-purple-600 font-semibold text-xs">
+        <div className="w-10 h-10 rounded-xl bg-teal-50 flex items-center justify-center text-[#2A9D8F] font-semibold text-xs">
           PDF
         </div>
         <div>

@@ -233,7 +233,7 @@ const DiagnosisPage = () => {
         {/* Chat Header */}
         <div className="p-4 sm:px-6 border-b border-gray-100 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-[#2A9D8F]/10 text-[#2A9D8F] flex items-center justify-center">
+            <div className="w-10 h-10 rounded-2xl bg-primary/10 text-primary flex items-center justify-center">
               <HiOutlineClipboardList className="w-5 h-5" />
             </div>
             <div>
@@ -308,7 +308,11 @@ const DiagnosisPage = () => {
                   )}
 
                   {/* Main Clinical Assessment Text */}
-                  <div className="whitespace-pre-line text-xs sm:text-sm font-normal leading-relaxed text-gray-700">
+                  <div
+                    className={`whitespace-pre-line text-xs sm:text-sm leading-relaxed ${
+                      msg.sender === 'user' ? 'text-white font-medium' : 'text-gray-800 font-normal'
+                    }`}
+                  >
                     {msg.sender === 'assistant' ? humanizeMessageText(msg.text) : msg.text}
                   </div>
 

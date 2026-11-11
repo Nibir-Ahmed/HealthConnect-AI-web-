@@ -97,7 +97,7 @@ const AdminSettingsPage = () => {
               onChange={(e) => setMaintenanceMode(e.target.checked)}
               className="sr-only peer"
             />
-            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
+            <div className="w-11 h-6 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-red-600"></div>
           </label>
         </div>
 
@@ -115,7 +115,7 @@ const AdminSettingsPage = () => {
               value={emergencyPhone}
               onChange={(e) => setEmergencyPhone(e.target.value)}
               required
-              className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold text-gray-900 focus:outline-none focus:border-[#2A9D8F]"
+              className="w-full pl-10 pr-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold text-gray-900 focus:outline-none focus:border-primary"
             />
           </div>
           <p className="text-[11px] text-gray-400 mt-1">
@@ -149,14 +149,14 @@ const AdminSettingsPage = () => {
             value={announcementText}
             onChange={(e) => setAnnouncementText(e.target.value)}
             placeholder="E.g., Online consultations are now available."
-            className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl text-xs sm:text-sm focus:outline-none focus:border-[#2A9D8F]"
+            className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl text-xs sm:text-sm focus:outline-none focus:border-primary"
           />
         </div>
 
         <div className="pt-2 flex justify-end">
           <button
             type="submit"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#2A9D8F] hover:bg-[#1E7A6E] text-white text-xs font-bold shadow-xs transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-primary hover:bg-primary-dark text-white text-xs font-bold shadow-xs transition-all cursor-pointer"
           >
             <HiOutlineSave className="w-4 h-4" />
             <span>Commit Configuration</span>

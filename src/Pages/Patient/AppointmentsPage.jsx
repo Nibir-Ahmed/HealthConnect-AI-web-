@@ -53,7 +53,7 @@ const AppointmentsPage = () => {
         </div>
         <Link
           to="/patient/doctors"
-          className="inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-[#2A9D8F] hover:bg-[#1E7A6E] text-white text-xs font-bold transition-all shadow-xs"
+          className="inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold transition-all shadow-xs"
         >
           + Book New Consultation
         </Link>
@@ -68,7 +68,7 @@ const AppointmentsPage = () => {
             onClick={() => setActiveTab(tab)}
             className={`px-4 py-2 rounded-xl text-xs font-bold capitalize transition-all cursor-pointer ${
               activeTab === tab
-                ? 'bg-[#2A9D8F]/10 text-[#2A9D8F]'
+                ? 'bg-primary/10 text-primary'
                 : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
             }`}
           >
@@ -127,7 +127,7 @@ const AppointmentsPage = () => {
                       {apt.status}
                     </span>
                   </div>
-                  <p className="text-xs font-semibold text-[#2A9D8F]">{apt.doctorSpecialty}</p>
+                  <p className="text-xs font-semibold text-primary">{apt.doctorSpecialty}</p>
 
                   <div className="flex flex-wrap items-center gap-3 text-xs text-gray-500 pt-1">
                     <span className="flex items-center gap-1 font-medium">
@@ -153,7 +153,7 @@ const AppointmentsPage = () => {
               <div className="flex items-center gap-2.5 self-end md:self-center shrink-0">
                 <Link
                   to={`/patient/chat/${apt.id}`}
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-[#2A9D8F] hover:bg-[#1E7A6E] text-white text-xs font-bold transition-all shadow-xs"
+                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold transition-all shadow-xs"
                 >
                   <HiOutlineChatAlt2 className="w-4 h-4" />
                   <span>Consultation Chat</span>

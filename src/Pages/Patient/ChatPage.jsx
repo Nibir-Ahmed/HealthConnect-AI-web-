@@ -162,7 +162,7 @@ const ChatPage = () => {
   return (
     <div className="max-w-5xl mx-auto h-[calc(100vh-8rem)] flex bg-white rounded-3xl border border-gray-200/80 shadow-sm overflow-hidden">
       {/* Left Sidebar: Meta Messenger Contacts List */}
-      <div className="w-80 border-r border-gray-100 flex flex-col shrink-0 hidden sm:flex bg-white">
+      <div className="w-80 border-r border-gray-100 flex flex-col shrink-0 sm:flex bg-white">
         <div className="p-4 pb-3 space-y-3">
           <div className="flex items-center justify-between">
             <h2 className="font-extrabold text-gray-900 text-xl tracking-tight">Chats</h2>
@@ -350,7 +350,7 @@ const ChatPage = () => {
                         <div
                           className={`px-4 py-2.5 rounded-2xl text-xs sm:text-sm leading-relaxed ${
                             isSelf
-                              ? 'bg-gradient-to-r from-[#0084FF] to-[#0099FF] text-white rounded-br-xs shadow-xs'
+                              ? 'bg-linear-to-r from-[#0084FF] to-[#0099FF] text-white rounded-br-xs shadow-xs'
                               : 'bg-[#F0F2F5] text-gray-900 rounded-bl-xs'
                           }`}
                         >

@@ -3,6 +3,21 @@
   themes: light --default;
 }
 
+/* Explicit brand color tokens overriding DaisyUI defaults */
+:root,
+:root:has(input.theme-controller[value=light]:checked),
+[data-theme="light"],
+[data-theme="dark"],
+body {
+  --color-primary: #2A9D8F;
+  --color-primary-content: #FFFFFF;
+  --color-primary-dark: #1E7A6E;
+  --color-primary-light: #3AB8A8;
+  --color-primary-faded: rgba(42, 157, 143, 0.1);
+  --color-emergency: #E63946;
+  --color-emergency-light: #FF6B6B;
+}
+
 @theme {
   --color-primary: #2A9D8F;
   --color-primary-light: #3AB8A8;

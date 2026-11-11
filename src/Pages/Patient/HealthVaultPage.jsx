@@ -116,7 +116,7 @@ const HealthVaultPage = () => {
         <button
           type="button"
           onClick={() => setShowUploadModal(true)}
-          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#2A9D8F] hover:bg-[#1E7A6E] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
         >
           <HiOutlineUpload className="w-4 h-4" />
           <span>Upload Document</span>
@@ -132,7 +132,7 @@ const HealthVaultPage = () => {
             onClick={() => setSelectedCategory(cat)}
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold capitalize transition-all cursor-pointer ${
               selectedCategory === cat
-                ? 'bg-[#2A9D8F] text-white shadow-xs'
+                ? 'bg-primary text-white shadow-xs'
                 : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
             }`}
           >
@@ -154,7 +154,7 @@ const HealthVaultPage = () => {
           <button
             type="button"
             onClick={() => setShowUploadModal(true)}
-            className="px-4 py-2 rounded-xl bg-[#2A9D8F] text-white text-xs font-bold"
+            className="px-4 py-2 rounded-xl bg-primary text-white text-xs font-bold"
           >
             Upload Document
           </button>
@@ -167,7 +167,7 @@ const HealthVaultPage = () => {
               className="bg-white rounded-3xl border border-gray-100 p-5 shadow-xs hover:border-gray-200 transition-all flex items-start justify-between gap-4"
             >
               <div className="flex items-start gap-3.5 min-w-0">
-                <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#2A9D8F] flex items-center justify-center shrink-0 text-xl">
+                <div className="w-12 h-12 rounded-2xl bg-teal-50 text-primary flex items-center justify-center shrink-0 text-xl">
                   <HiOutlineDocumentText className="w-6 h-6" />
                 </div>
                 <div className="min-w-0">
@@ -235,7 +235,7 @@ const HealthVaultPage = () => {
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="E.g., Lipid Profile Test or Chest X-Ray"
                   required
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-[#2A9D8F]"
+                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-primary"
                 />
               </div>
 
@@ -247,7 +247,7 @@ const HealthVaultPage = () => {
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium focus:outline-none focus:border-[#2A9D8F]"
+                    className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium focus:outline-none focus:border-primary"
                   >
                     <option value="lab_report">Lab Report</option>
                     <option value="prescription">Prescription</option>
@@ -266,7 +266,7 @@ const HealthVaultPage = () => {
                     value={eventDate}
                     onChange={(e) => setEventDate(e.target.value)}
                     required
-                    className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium focus:outline-none focus:border-[#2A9D8F]"
+                    className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
@@ -281,7 +281,7 @@ const HealthVaultPage = () => {
                     value={doctorName}
                     onChange={(e) => setDoctorName(e.target.value)}
                     placeholder="Dr. Name (Optional)"
-                    className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#2A9D8F]"
+                    className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-primary"
                   />
                 </div>
 
@@ -294,7 +294,7 @@ const HealthVaultPage = () => {
                     value={facility}
                     onChange={(e) => setFacility(e.target.value)}
                     placeholder="Facility name (Optional)"
-                    className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#2A9D8F]"
+                    className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
@@ -308,7 +308,7 @@ const HealthVaultPage = () => {
                   type="file"
                   accept="application/pdf,image/jpeg,image/png"
                   onChange={handleFileChange}
-                  className="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-[#2A9D8F]/10 file:text-[#2A9D8F] hover:file:bg-[#2A9D8F]/20 cursor-pointer"
+                  className="w-full text-xs text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer"
                 />
               </div>
 
@@ -322,7 +322,7 @@ const HealthVaultPage = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded-xl bg-[#2A9D8F] hover:bg-[#1E7A6E] text-white text-xs font-bold shadow-xs cursor-pointer"
+                  className="px-5 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold shadow-xs cursor-pointer"
                 >
                   Save to Vault
                 </button>

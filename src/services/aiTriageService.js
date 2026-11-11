@@ -151,9 +151,9 @@ function generateLocalTriageResponse(userText, matchedConditions) {
 export async function evaluateSymptomsWithAI(symptomText) {
   const cleanText = (symptomText || '').trim();
 
-  // -------------------------------------------------------------
+  // 
   // Layer 1: Deterministic Emergency Circuit Breaker
-  // -------------------------------------------------------------
+  // 
   const isEmergency = EMERGENCY_PATTERNS.some((pattern) => pattern.test(cleanText));
   if (isEmergency) {
     return {

@@ -77,7 +77,7 @@ const Sidebar = () => {
             HealthConnect
           </span>
         </Link>
-        <span className="text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#2A9D8F]/10 text-[#2A9D8F] shrink-0 border border-[#2A9D8F]/20 ml-2">
+        <span className="text-[9px] font-extrabold uppercase tracking-wider px-2 py-0.5 rounded-full bg-teal-50 text-[#2A9D8F] shrink-0 border border-teal-200 ml-2">
           {currentRole}
         </span>
       </div>
@@ -93,7 +93,7 @@ const Sidebar = () => {
               className={({ isActive }) =>
                 `flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium transition-all ${
                   isActive
-                    ? 'bg-[#2A9D8F]/10 text-[#2A9D8F] font-semibold'
+                    ? 'bg-teal-50 text-[#1E7A6E] font-semibold border-l-3 border-[#2A9D8F]'
                     : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                 }`
               }

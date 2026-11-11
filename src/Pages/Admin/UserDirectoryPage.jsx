@@ -88,7 +88,7 @@ const UserDirectoryPage = () => {
               onClick={() => setRoleFilter(role)}
               className={`px-4 py-2 rounded-xl text-xs font-bold capitalize transition-all cursor-pointer ${
                 roleFilter === role
-                  ? 'bg-[#2A9D8F] text-white shadow-xs'
+                  ? 'bg-primary text-white shadow-xs'
                   : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
               }`}
             >
@@ -104,7 +104,7 @@ const UserDirectoryPage = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by name or email..."
-            className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#2A9D8F]"
+            className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-primary"
           />
         </div>
       </div>
@@ -153,7 +153,7 @@ const UserDirectoryPage = () => {
                     <span
                       className={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider ${
                         userItem.role === 'admin'
-                          ? 'bg-purple-50 text-purple-700'
+                          ? 'bg-slate-100 text-slate-800 border border-slate-200'
                           : userItem.role === 'doctor'
                           ? 'bg-blue-50 text-blue-700'
                           : 'bg-teal-50 text-teal-700'
@@ -170,7 +170,7 @@ const UserDirectoryPage = () => {
                       aria-label={`Change role for ${userItem.name}`}
                       value={userItem.role}
                       onChange={(e) => handleRoleChange(userItem.id, e.target.value)}
-                      className="px-2.5 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-xs font-semibold text-gray-700 focus:outline-none focus:border-[#2A9D8F] cursor-pointer"
+                      className="px-2.5 py-1.5 bg-gray-50 border border-gray-200 rounded-lg text-xs font-semibold text-gray-700 focus:outline-none focus:border-primary cursor-pointer"
                     >
                       <option value="patient">Patient</option>
                       <option value="doctor">Doctor</option>

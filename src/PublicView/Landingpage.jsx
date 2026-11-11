@@ -54,10 +54,10 @@ const Landingpage = () => {
       <Navbar />
 
       {/* Hero Section: fills full viewport height so cards below don't peek in */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-emerald-50/40 via-white to-gray-50/50 border-b border-gray-100 min-h-[calc(100vh-4rem)] flex flex-col justify-between">
+      <section className="relative overflow-hidden bg-linear-to-b from-emerald-50/40 via-white to-gray-50/50 border-b border-gray-100 min-h-[calc(100vh-4rem)] flex flex-col justify-between">
         {/* Background glow */}
         <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full opacity-40 blur-[120px] pointer-events-none"
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-175 h-125 rounded-full opacity-40 blur-[120px] pointer-events-none"
           style={{
             background: 'radial-gradient(circle, rgba(76,175,130,0.35) 0%, rgba(76,175,130,0.08) 50%, transparent 70%)',
           }}
@@ -124,7 +124,7 @@ const Landingpage = () => {
       </section>
 
       {/* Feature Section */}
-      <section className="bg-gradient-to-b from-gray-50/60 via-white to-gray-50/60 py-20 px-4 border-b border-gray-100">
+      <section className="bg-linear-to-b from-gray-50/60 via-white to-gray-50/60 py-20 px-4 border-b border-gray-100">
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Card 1 */}
           <div className="bg-white rounded-2xl border border-gray-100/90 p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col items-center text-center">
@@ -150,8 +150,8 @@ const Landingpage = () => {
 
           {/* Card 3 */}
           <div className="bg-white rounded-2xl border border-gray-100/90 p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col items-center text-center">
-            <div className="w-12 h-12 rounded-xl bg-purple-50 flex items-center justify-center mb-5">
-              <BiShieldQuarter className="w-6 h-6 text-purple-400" />
+            <div className="w-12 h-12 rounded-xl bg-teal-50 flex items-center justify-center mb-5">
+              <BiShieldQuarter className="w-6 h-6 text-[#2A9D8F]" />
             </div>
             <h3 className="text-lg font-bold text-gray-900 mb-2">Your Medical Records</h3>
             <p className="text-sm text-gray-500 leading-relaxed">

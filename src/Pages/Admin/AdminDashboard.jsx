@@ -61,7 +61,7 @@ const AdminDashboard = () => {
       )}
 
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-slate-900 to-slate-800 rounded-3xl p-6 sm:p-8 text-white shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+      <div className="bg-linear-to-r from-slate-900 to-slate-800 rounded-3xl p-6 sm:p-8 text-white shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-semibold backdrop-blur-xs">
             <span className="w-2 h-2 rounded-full bg-emerald-400" />
@@ -76,7 +76,7 @@ const AdminDashboard = () => {
         <div className="flex items-center gap-3">
           <Link
             to="/admin/verifications"
-            className="px-5 py-2.5 rounded-2xl bg-[#2A9D8F] hover:bg-[#1E7A6E] text-white font-bold text-xs shadow-md transition-all"
+            className="px-5 py-2.5 rounded-2xl bg-primary hover:bg-primary-dark text-white font-bold text-xs shadow-md transition-all"
           >
             Verify Doctors ({pendingDoctors.length})
           </Link>
@@ -97,7 +97,7 @@ const AdminDashboard = () => {
             <h3 className="text-3xl font-extrabold text-gray-900 mt-1">{patients.length}</h3>
             <p className="text-[11px] text-gray-500 mt-1">Registered clients</p>
           </div>
-          <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#2A9D8F] flex items-center justify-center text-xl">
+          <div className="w-12 h-12 rounded-2xl bg-teal-50 text-primary flex items-center justify-center text-xl">
             <HiOutlineUsers className="w-6 h-6" />
           </div>
         </div>
@@ -130,7 +130,7 @@ const AdminDashboard = () => {
             <h3 className="text-3xl font-extrabold text-gray-900 mt-1">{appointments.length}</h3>
             <p className="text-[11px] text-gray-500 mt-1">Platform-wide sessions</p>
           </div>
-          <div className="w-12 h-12 rounded-2xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl">
+          <div className="w-12 h-12 rounded-2xl bg-teal-50 text-[#2A9D8F] flex items-center justify-center text-xl">
             <HiOutlineCalendar className="w-6 h-6" />
           </div>
         </div>
@@ -147,7 +147,7 @@ const AdminDashboard = () => {
               </span>
             )}
           </div>
-          <Link to="/admin/verifications" className="text-xs font-semibold text-[#2A9D8F] hover:underline flex items-center gap-1">
+          <Link to="/admin/verifications" className="text-xs font-semibold text-primary hover:underline flex items-center gap-1">
             Review all <HiOutlineArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
@@ -172,7 +172,7 @@ const AdminDashboard = () => {
                   />
                   <div className="min-w-0">
                     <h4 className="font-bold text-gray-900 text-sm truncate">{doc.name}</h4>
-                    <p className="text-xs text-[#2A9D8F] font-medium">{doc.specialty}</p>
+                    <p className="text-xs text-primary font-medium">{doc.specialty}</p>
                     <p className="text-[10px] text-gray-400 font-mono mt-0.5">
                       BMDC: {doc.bmdcNumber || 'Not provided'}
                     </p>
@@ -181,7 +181,7 @@ const AdminDashboard = () => {
 
                 <Link
                   to="/admin/verifications"
-                  className="px-4 py-2 rounded-xl bg-[#2A9D8F] hover:bg-[#1E7A6E] text-white text-xs font-bold transition-all shadow-xs shrink-0"
+                  className="px-4 py-2 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold transition-all shadow-xs shrink-0"
                 >
                   Audit License
                 </Link>

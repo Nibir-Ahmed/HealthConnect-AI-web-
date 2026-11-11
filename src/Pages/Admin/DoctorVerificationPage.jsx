@@ -203,7 +203,7 @@ const DoctorVerificationPage = () => {
               onClick={() => setFilterTab(tab)}
               className={`px-4 py-2 rounded-xl text-xs font-bold capitalize transition-all cursor-pointer ${
                 filterTab === tab
-                  ? 'bg-[#2A9D8F] text-white shadow-xs'
+                  ? 'bg-primary text-white shadow-xs'
                   : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
               }`}
             >
@@ -225,7 +225,7 @@ const DoctorVerificationPage = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Filter by name, specialty, or BMDC..."
-            className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#2A9D8F]"
+            className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-primary"
           />
         </div>
       </div>
@@ -363,7 +363,7 @@ const DoctorVerificationPage = () => {
                     setEditingDoctor({ ...editingDoctor, bmdcNumber: e.target.value })
                   }
                   required
-                  className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs font-mono focus:outline-none focus:border-[#2A9D8F]"
+                  className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs font-mono focus:outline-none focus:border-primary"
                 />
               </div>
 
@@ -378,7 +378,7 @@ const DoctorVerificationPage = () => {
                     setEditingDoctor({ ...editingDoctor, specialty: e.target.value })
                   }
                   required
-                  className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#2A9D8F]"
+                  className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-primary"
                 />
               </div>
 
@@ -394,7 +394,7 @@ const DoctorVerificationPage = () => {
                     onChange={(e) =>
                       setEditingDoctor({ ...editingDoctor, consultationFee: e.target.value })
                     }
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#2A9D8F]"
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-primary"
                   />
                 </div>
 
@@ -409,7 +409,7 @@ const DoctorVerificationPage = () => {
                     onChange={(e) =>
                       setEditingDoctor({ ...editingDoctor, experience: e.target.value })
                     }
-                    className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#2A9D8F]"
+                    className="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
@@ -424,7 +424,7 @@ const DoctorVerificationPage = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2 rounded-xl bg-[#2A9D8F] text-white text-xs font-bold shadow-xs cursor-pointer"
+                  className="px-5 py-2 rounded-xl bg-primary text-white text-xs font-bold shadow-xs cursor-pointer"
                 >
                   Save Credentials
                 </button>

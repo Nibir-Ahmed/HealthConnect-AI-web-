@@ -10,8 +10,8 @@ const Navbar = () => {
     role === 'admin'
       ? '/admin/dashboard'
       : role === 'doctor'
-      ? '/doctor/dashboard'
-      : '/patient/dashboard';
+        ? '/doctor/dashboard'
+        : '/patient/dashboard';
 
   return (
     <nav className="sticky top-0 z-50 bg-white border-b border-gray-100 shadow-sm">
@@ -25,7 +25,7 @@ const Navbar = () => {
               className="h-9 w-9 rounded-full object-cover"
             />
             <span className="text-lg font-semibold text-gray-900 tracking-tight">
-              HealthConnect
+              HealthConnect AI
             </span>
           </Link>
 

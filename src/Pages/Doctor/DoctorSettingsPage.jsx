@@ -156,7 +156,7 @@ const DoctorSettingsPage = () => {
                   onClick={() => toggleSlot(slot)}
                   className={`py-3 px-3 rounded-2xl text-xs font-bold border transition-all cursor-pointer ${
                     active
-                      ? 'bg-[#2A9D8F] text-white border-[#2A9D8F] shadow-xs'
+                      ? 'bg-primary text-white border-primary shadow-xs'
                       : 'bg-gray-50 hover:bg-gray-100 text-gray-600 border-gray-200'
                   }`}
                 >
@@ -179,7 +179,7 @@ const DoctorSettingsPage = () => {
               value={fee}
               onChange={(e) => setFee(e.target.value)}
               required
-              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-extrabold focus:outline-none focus:border-[#2A9D8F]"
+              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-extrabold focus:outline-none focus:border-primary"
             />
           </div>
 
@@ -190,7 +190,7 @@ const DoctorSettingsPage = () => {
             <select
               value={specialty}
               onChange={(e) => setSpecialty(e.target.value)}
-              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-semibold focus:outline-none focus:border-[#2A9D8F]"
+              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-semibold focus:outline-none focus:border-primary"
             >
               {SPECIALTIES.map((spec) => (
                 <option key={spec} value={spec}>
@@ -209,7 +209,7 @@ const DoctorSettingsPage = () => {
               min="0"
               value={experience}
               onChange={(e) => setExperience(e.target.value)}
-              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#2A9D8F]"
+              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-primary"
             />
           </div>
         </div>
@@ -225,7 +225,7 @@ const DoctorSettingsPage = () => {
               value={bmdcNumber}
               onChange={(e) => setBmdcNumber(e.target.value)}
               placeholder="E.g., A-12345"
-              className="w-full sm:max-w-xs px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-mono focus:outline-none focus:border-[#2A9D8F]"
+              className="w-full sm:max-w-xs px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-mono focus:outline-none focus:border-primary"
             />
           </div>
 
@@ -238,7 +238,7 @@ const DoctorSettingsPage = () => {
               value={bio}
               maxLength={600}
               onChange={(e) => setBio(e.target.value)}
-              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-[#2A9D8F]"
+              className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-primary"
             />
           </div>
         </div>
@@ -246,7 +246,7 @@ const DoctorSettingsPage = () => {
         <div className="pt-2 flex justify-end">
           <button
             type="submit"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#2A9D8F] hover:bg-[#1E7A6E] text-white text-xs font-bold shadow-xs transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-primary hover:bg-primary-dark text-white text-xs font-bold shadow-xs transition-all cursor-pointer"
           >
             <HiOutlineSave className="w-4 h-4" />
             <span>Save Practice Settings</span>

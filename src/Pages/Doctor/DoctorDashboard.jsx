@@ -111,7 +111,7 @@ const DoctorDashboard = () => {
       )}
 
       {/* Header Banner */}
-      <div className="bg-gradient-to-r from-teal-800 to-emerald-900 rounded-3xl p-6 sm:p-8 text-white shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-6">
+      <div className="bg-linear-to-r from-teal-800 to-emerald-900 rounded-3xl p-6 sm:p-8 text-white shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-6">
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-xs font-semibold backdrop-blur-xs">
             {doctorProfile?.isVerified ? (
@@ -177,7 +177,7 @@ const DoctorDashboard = () => {
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-lg font-bold text-gray-900">Immediate Consultation Queue</h2>
-          <Link to="/doctor/appointments" className="text-xs font-semibold text-[#2A9D8F] hover:underline flex items-center gap-1">
+          <Link to="/doctor/appointments" className="text-xs font-semibold text-primary hover:underline flex items-center gap-1">
             Full queue <HiOutlineArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
@@ -218,7 +218,7 @@ const DoctorDashboard = () => {
                 <div className="flex items-center gap-2 self-end sm:self-center">
                   <Link
                     to={`/doctor/chat/${apt.id}`}
-                    className="px-3.5 py-2 rounded-xl bg-[#2A9D8F] hover:bg-[#1E7A6E] text-white text-xs font-bold transition-all shadow-xs"
+                    className="px-3.5 py-2 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold transition-all shadow-xs"
                   >
                     Open Consultation Chat
                   </Link>

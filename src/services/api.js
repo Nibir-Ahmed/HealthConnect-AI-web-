@@ -254,9 +254,9 @@ export const authApi = {
   },
 };
 
-// -------------------------------------------------------------
+// 
 // Doctors & Practice APIs
-// -------------------------------------------------------------
+// 
 export const doctorsApi = {
   async getAll({ specialty, query, verifiedOnly = true } = {}) {
     if (API_BASE_URL) {
@@ -306,9 +306,9 @@ export const doctorsApi = {
   },
 };
 
-// -------------------------------------------------------------
+// 
 // Appointments APIs
-// -------------------------------------------------------------
+// 
 export const appointmentsApi = {
   async getAll({ patientId, doctorId, status } = {}) {
     if (API_BASE_URL) {
@@ -348,9 +348,9 @@ export const appointmentsApi = {
   },
 };
 
-// -------------------------------------------------------------
+// 
 // Prescriptions APIs
-// -------------------------------------------------------------
+// 
 export const prescriptionsApi = {
   async getAll({ patientId, doctorId } = {}) {
     if (API_BASE_URL) {
@@ -378,9 +378,9 @@ export const prescriptionsApi = {
   },
 };
 
-// -------------------------------------------------------------
+// 
 // Health Records & Vault APIs
-// -------------------------------------------------------------
+// 
 export const healthRecordsApi = {
   async getAll({ patientId } = {}) {
     if (API_BASE_URL) {
@@ -411,9 +411,9 @@ export const healthRecordsApi = {
   },
 };
 
-// -------------------------------------------------------------
+// 
 // System Config APIs
-// -------------------------------------------------------------
+// 
 export const systemApi = {
   async getConfig() {
     if (API_BASE_URL) {

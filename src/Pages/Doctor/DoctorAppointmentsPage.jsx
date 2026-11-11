@@ -80,7 +80,7 @@ const DoctorAppointmentsPage = () => {
             onClick={() => setActiveTab(tab)}
             className={`px-4 py-2 rounded-xl text-xs font-bold capitalize transition-all cursor-pointer ${
               activeTab === tab
-                ? 'bg-[#2A9D8F]/10 text-[#2A9D8F]'
+                ? 'bg-primary/10 text-primary'
                 : 'text-gray-500 hover:text-gray-900 hover:bg-gray-50'
             }`}
           >
@@ -156,7 +156,7 @@ const DoctorAppointmentsPage = () => {
               <div className="flex flex-wrap items-center gap-2 self-end md:self-center shrink-0">
                 <Link
                   to={`/doctor/chat/${apt.id}`}
-                  className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-[#2A9D8F] hover:bg-[#1E7A6E] text-white text-xs font-bold transition-all shadow-xs"
+                  className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold transition-all shadow-xs"
                 >
                   <HiOutlineChatAlt2 className="w-4 h-4" />
                   <span>Join Chat</span>

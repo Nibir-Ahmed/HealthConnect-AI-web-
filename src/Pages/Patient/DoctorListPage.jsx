@@ -77,7 +77,7 @@ const DoctorListPage = () => {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search by doctor name or specialty..."
-            className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-[#2A9D8F] transition-all shadow-xs"
+            className="w-full pl-12 pr-4 py-3 bg-white border border-gray-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-primary transition-all shadow-xs"
           />
         </div>
 
@@ -90,7 +90,7 @@ const DoctorListPage = () => {
               onClick={() => setSelectedSpecialty(spec)}
               className={`px-4 py-2 rounded-full text-xs font-semibold whitespace-nowrap transition-all cursor-pointer ${
                 selectedSpecialty === spec
-                  ? 'bg-[#2A9D8F] text-white shadow-xs'
+                  ? 'bg-primary text-white shadow-xs'
                   : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
               }`}
             >
@@ -142,7 +142,7 @@ const DoctorListPage = () => {
                         title="BMDC Verified Practitioner"
                       />
                     </div>
-                    <p className="text-xs font-semibold text-[#2A9D8F]">{doc.specialty}</p>
+                    <p className="text-xs font-semibold text-primary">{doc.specialty}</p>
                     <p className="text-[11px] text-gray-400 mt-0.5">{doc.experience} Years Experience</p>
                   </div>
                 </div>
@@ -170,7 +170,7 @@ const DoctorListPage = () => {
               <div className="mt-5 pt-3 border-t border-gray-50 flex items-center gap-2">
                 <Link
                   to={`/patient/doctors/${doc.id}`}
-                  className="w-full py-2.5 rounded-xl bg-[#2A9D8F] hover:bg-[#1E7A6E] text-white text-xs font-bold text-center transition-all shadow-xs"
+                  className="w-full py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold text-center transition-all shadow-xs"
                 >
                   Book Appointment
                 </Link>

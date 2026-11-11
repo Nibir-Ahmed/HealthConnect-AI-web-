@@ -86,7 +86,7 @@ const ProfilePage = () => {
       {/* Printable Emergency Medical Card per design.md & context.md Section 5.1 */}
       <div
         id="printable-medical-card"
-        className="bg-gradient-to-br from-white to-gray-50 rounded-3xl border-2 border-red-500/30 p-6 sm:p-8 shadow-sm space-y-6 relative overflow-hidden"
+        className="bg-linear-to-br from-white to-gray-50 rounded-3xl border-2 border-red-500/30 p-6 sm:p-8 shadow-sm space-y-6 relative overflow-hidden"
       >
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-gray-200">
           <div className="flex items-center gap-3">
@@ -127,7 +127,7 @@ const ProfilePage = () => {
                 {contactPhone && (
                   <a
                     href={`tel:${contactPhone}`}
-                    className="text-xs font-bold text-[#2A9D8F] hover:underline inline-flex items-center gap-1"
+                    className="text-xs font-bold text-primary hover:underline inline-flex items-center gap-1"
                   >
                     <HiOutlinePhone className="w-3.5 h-3.5" />
                     {contactPhone}
@@ -193,7 +193,7 @@ const ProfilePage = () => {
                 value={bloodGroup}
                 onChange={(e) => setBloodGroup(e.target.value)}
                 required
-                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold focus:outline-none focus:border-[#2A9D8F]"
+                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold focus:outline-none focus:border-primary"
               >
                 <option value="">Select Blood Group</option>
                 {BLOOD_GROUPS.map((bg) => (
@@ -213,7 +213,7 @@ const ProfilePage = () => {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 required
-                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#2A9D8F]"
+                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-primary"
               />
             </div>
           </div>
@@ -227,7 +227,7 @@ const ProfilePage = () => {
               value={allergiesText}
               onChange={(e) => setAllergiesText(e.target.value)}
               placeholder="E.g., Penicillin, Peanuts, Sulfa Drugs"
-              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#2A9D8F]"
+              className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-primary"
             />
           </div>
 
@@ -241,7 +241,7 @@ const ProfilePage = () => {
                 value={contactName}
                 onChange={(e) => setContactName(e.target.value)}
                 required
-                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#2A9D8F]"
+                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-primary"
               />
             </div>
 
@@ -254,7 +254,7 @@ const ProfilePage = () => {
                 value={relationship}
                 onChange={(e) => setRelationship(e.target.value)}
                 required
-                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#2A9D8F]"
+                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-primary"
               />
             </div>
 
@@ -267,7 +267,7 @@ const ProfilePage = () => {
                 value={contactPhone}
                 onChange={(e) => setContactPhone(e.target.value)}
                 required
-                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-[#2A9D8F]"
+                className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-primary"
               />
             </div>
           </div>
@@ -275,7 +275,7 @@ const ProfilePage = () => {
           <div className="pt-2 flex justify-end">
             <button
               type="submit"
-              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-[#2A9D8F] hover:bg-[#1E7A6E] text-white text-xs font-bold shadow-xs transition-all cursor-pointer"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold shadow-xs transition-all cursor-pointer"
             >
               <HiOutlineSave className="w-4 h-4" />
               <span>Save Changes</span>

@@ -177,7 +177,7 @@ const PrescriptionPage = () => {
             value={selectedAppointmentId}
             onChange={(e) => setSelectedAppointmentId(e.target.value)}
             required
-            className="w-full sm:max-w-md px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold focus:outline-none focus:border-[#2A9D8F]"
+            className="w-full sm:max-w-md px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold focus:outline-none focus:border-primary"
           >
             {appointments.map((apt) => (
               <option key={apt.id} value={apt.id}>
@@ -196,7 +196,7 @@ const PrescriptionPage = () => {
             <button
               type="button"
               onClick={addMedicationRow}
-              className="inline-flex items-center gap-1 text-xs font-bold text-[#2A9D8F] hover:underline cursor-pointer"
+              className="inline-flex items-center gap-1 text-xs font-bold text-primary hover:underline cursor-pointer"
             >
               <HiOutlinePlus className="w-4 h-4" /> Add Medication
             </button>
@@ -218,7 +218,7 @@ const PrescriptionPage = () => {
                     onChange={(e) => handleMedChange(idx, 'name', e.target.value)}
                     placeholder="E.g., Paracetamol, Amoxicillin"
                     required
-                    className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs font-semibold focus:outline-none focus:border-[#2A9D8F]"
+                    className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs font-semibold focus:outline-none focus:border-primary"
                   />
                 </div>
 
@@ -232,7 +232,7 @@ const PrescriptionPage = () => {
                     onChange={(e) => handleMedChange(idx, 'dosage', e.target.value)}
                     placeholder="500mg"
                     required
-                    className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#2A9D8F]"
+                    className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-primary"
                   />
                 </div>
 
@@ -246,7 +246,7 @@ const PrescriptionPage = () => {
                     onChange={(e) => handleMedChange(idx, 'frequency', e.target.value)}
                     placeholder="1-0-1 after meal"
                     required
-                    className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#2A9D8F]"
+                    className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-primary"
                   />
                 </div>
 
@@ -260,7 +260,7 @@ const PrescriptionPage = () => {
                     onChange={(e) => handleMedChange(idx, 'duration', e.target.value)}
                     placeholder="5 days"
                     required
-                    className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#2A9D8F]"
+                    className="w-full px-3 py-2 bg-white border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-primary"
                   />
                 </div>
 
@@ -291,14 +291,14 @@ const PrescriptionPage = () => {
             maxLength={800}
             onChange={(e) => setNotes(e.target.value)}
             placeholder="E.g., Drink at least 2.5 liters of fluids daily. Avoid cold drinks. Review symptoms in 5 days if fever persists."
-            className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-[#2A9D8F]"
+            className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-primary"
           />
         </div>
 
         <div className="pt-2 flex justify-end">
           <button
             type="submit"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-[#2A9D8F] hover:bg-[#1E7A6E] text-white text-xs font-bold shadow-xs transition-all cursor-pointer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-2xl bg-primary hover:bg-primary-dark text-white text-xs font-bold shadow-xs transition-all cursor-pointer"
           >
             <HiOutlineDocumentText className="w-4 h-4" />
             <span>Issue & Sign Prescription</span>

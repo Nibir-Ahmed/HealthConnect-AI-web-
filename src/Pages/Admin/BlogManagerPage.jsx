@@ -108,7 +108,7 @@ const BlogManagerPage = () => {
         <button
           type="button"
           onClick={handleOpenNew}
-          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-[#2A9D8F] hover:bg-[#1E7A6E] text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
+          className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
         >
           <HiOutlinePlus className="w-4 h-4" />
           <span>Write New Article</span>
@@ -141,7 +141,7 @@ const BlogManagerPage = () => {
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="E.g., Managing Hypertension in Everyday Life"
                   required
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold focus:outline-none focus:border-[#2A9D8F]"
+                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-sm font-bold focus:outline-none focus:border-primary"
                 />
               </div>
 
@@ -153,7 +153,7 @@ const BlogManagerPage = () => {
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-semibold focus:outline-none focus:border-[#2A9D8F]"
+                    className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs font-semibold focus:outline-none focus:border-primary"
                   >
                     {CATEGORIES.map((c) => (
                       <option key={c} value={c}>
@@ -173,7 +173,7 @@ const BlogManagerPage = () => {
                     onChange={(e) => setReadTime(e.target.value)}
                     placeholder="E.g., 4 min read"
                     required
-                    className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#2A9D8F]"
+                    className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-primary"
                   />
                 </div>
 
@@ -186,7 +186,7 @@ const BlogManagerPage = () => {
                     value={author}
                     onChange={(e) => setAuthor(e.target.value)}
                     required
-                    className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#2A9D8F]"
+                    className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
@@ -201,7 +201,7 @@ const BlogManagerPage = () => {
                   onChange={(e) => setImage(e.target.value)}
                   required
                   placeholder="Image URL or local path"
-                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-[#2A9D8F]"
+                  className="w-full px-4 py-2.5 bg-gray-50 border border-gray-200 rounded-xl text-xs focus:outline-none focus:border-primary"
                 />
                 {image && (
                   <div className="mt-2 relative rounded-xl overflow-hidden border border-gray-200 h-36 bg-gray-50">
@@ -230,7 +230,7 @@ const BlogManagerPage = () => {
                   onChange={(e) => setContent(e.target.value)}
                   placeholder="Compose article contents..."
                   required
-                  className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-[#2A9D8F]"
+                  className="w-full p-4 bg-gray-50 border border-gray-200 rounded-2xl text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-teal-500/20 focus:border-primary"
                 />
               </div>
 
@@ -244,7 +244,7 @@ const BlogManagerPage = () => {
                 </button>
                 <button
                   type="submit"
-                  className="px-5 py-2.5 rounded-xl bg-[#2A9D8F] hover:bg-[#1E7A6E] text-white text-xs font-bold shadow-xs cursor-pointer"
+                  className="px-5 py-2.5 rounded-xl bg-primary hover:bg-primary-dark text-white text-xs font-bold shadow-xs cursor-pointer"
                 >
                   {editingId ? 'Save Changes' : 'Publish Article'}
                 </button>
